@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#2d3748"/>
+  <rect x="100" y="80" width="200" height="120" rx="4" fill="#4a5568"/>
+  <text x="200" y="150" text-anchor="middle" fill="#718096" font-family="Arial" font-size="16">Y축 모터</text>
+  <rect x="280" y="110" width="60" height="60" fill="#1a202c" rx="2"/>
+  <path d="M310 170 L310 200 Q310 220, 290 220 L250 220" stroke="#48bb78" stroke-width="4" fill="none"/>
+  <rect x="240" y="215" width="20" height="10" fill="#48bb78"/>
+  <circle cx="310" cy="140" r="15" fill="#48bb78"/>
+  <path d="M302 140 L308 146 L320 134" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="350" y="145" fill="#48bb78" font-family="Arial" font-size="12">확인</text>
+  <text x="200" y="265" text-anchor="middle" fill="#a0aec0" font-family="Arial" font-size="14">Y축 케이블 연결 확인</text>
+</svg>

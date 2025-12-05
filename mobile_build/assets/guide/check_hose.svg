@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#2d3748"/>
+  <path d="M80 100 Q120 100, 140 130 Q160 160, 200 160 Q240 160, 260 130 Q280 100, 320 100" stroke="#63b3ed" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <path d="M80 100 Q120 100, 140 130 Q160 160, 200 160 Q240 160, 260 130 Q280 100, 320 100" stroke="#90cdf4" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <circle cx="200" cy="160" r="20" fill="none" stroke="#f56565" stroke-width="3"/>
+  <path d="M188 148 L212 172 M212 148 L188 172" stroke="#f56565" stroke-width="3" stroke-linecap="round"/>
+  <path d="M200 185 L200 210" stroke="#f56565" stroke-width="2"/>
+  <text x="200" y="230" text-anchor="middle" fill="#f56565" font-family="Arial" font-size="12">꺾임 확인</text>
+  <text x="200" y="270" text-anchor="middle" fill="#a0aec0" font-family="Arial" font-size="14">호스가 꺾이거나 눌린 곳 확인</text>
+</svg>

@@ -1,0 +1,723 @@
+[
+  {
+    "id": 1,
+    "error_code": "ESTOP_NON_ERR",
+    "board": "DMC",
+    "severity": "INFO",
+    "display_title": "비상정지 해제됨 (E-Stop Released)",
+    "keywords": ["1", "비상", "정지", "해제", "ESTOP"],
+    "description": "비상정지 상태가 해제되었습니다.",
+    "steps": [
+      { "order": 1, "text": "정상 상태입니다. 작업을 계속 진행하세요.", "image": null }
+    ]
+  },
+  {
+    "id": 2,
+    "error_code": "ESTOP_KEY_ERR",
+    "board": "DMC",
+    "severity": "CRITICAL",
+    "display_title": "비상정지 버튼 눌림 (E-Stop Key Pressed)",
+    "keywords": ["2", "비상", "정지", "버튼", "ESTOP", "KEY"],
+    "description": "비상정지 버튼이 눌려 장비가 정지했습니다.",
+    "steps": [
+      { "order": 1, "text": "장비 측면의 빨간색 비상정지 버튼을 시계방향으로 돌려 해제하세요.", "image": "assets/guide/release_estop.svg" },
+      { "order": 2, "text": "터치 스크린에서 'Resume' 또는 '재개'를 눌러주세요.", "image": "assets/guide/check_screen.svg" }
+    ]
+  },
+  {
+    "id": 3,
+    "error_code": "ESTOP_FORCED_OPEN_ERR",
+    "board": "DMC",
+    "severity": "CRITICAL",
+    "display_title": "강제 개방 감지 (Forced Open)",
+    "keywords": ["3", "강제", "개방", "FORCED", "OPEN"],
+    "description": "장비 덮개가 강제로 열렸습니다.",
+    "steps": [
+      { "order": 1, "text": "장비의 모든 덮개를 확실히 닫아주세요.", "image": "assets/guide/close_window.svg" },
+      { "order": 2, "text": "전원을 껐다가 다시 켜주세요.", "image": "assets/guide/power_reset.svg" }
+    ]
+  },
+  {
+    "id": 4,
+    "error_code": "ESTOP_DOOR_OPEN_ERR",
+    "board": "DMC",
+    "severity": "WARNING",
+    "display_title": "창문 열림 감지 (Door Open)",
+    "keywords": ["4", "창문", "도어", "열림", "Door", "OPEN"],
+    "description": "가공 중에 장비의 창문(Door)이 열렸거나 센서가 감지되었습니다.",
+    "steps": [
+      { "order": 1, "text": "장비 앞면의 창문을 꽉 닫아주세요.", "image": "assets/guide/close_window.svg" },
+      { "order": 2, "text": "창문 센서 쪽에 이물질이 끼어있는지 확인하세요.", "image": "assets/guide/check_sensor_window.svg" }
+    ]
+  },
+  {
+    "id": 5,
+    "error_code": "ESTOP_TANK_OPEN_ERR",
+    "board": "DMC",
+    "severity": "WARNING",
+    "display_title": "물 탱크 열림 (Water Tank Open)",
+    "keywords": ["5", "물탱크", "서랍", "냉각수", "TANK"],
+    "description": "하단 물 탱크 서랍이 제대로 닫히지 않았습니다.",
+    "steps": [
+      { "order": 1, "text": "물 탱크 서랍을 '딸깍' 소리가 날 때까지 끝까지 밀어 넣으세요.", "image": "assets/guide/close_watertank.svg" }
+    ]
+  },
+  {
+    "id": 6,
+    "error_code": "ESTOP_PUMP_LOW_ERR",
+    "board": "DMC",
+    "severity": "WARNING",
+    "display_title": "수압 낮음 / 냉각수 부족 (Low Water Pressure)",
+    "keywords": ["6", "수압", "물", "펌프", "Water", "PUMP"],
+    "description": "냉각수 흐름이 약합니다. 물이 부족하거나 호스가 꼬였을 수 있습니다.",
+    "steps": [
+      { "order": 1, "text": "물 탱크에 물(냉각수)을 보충해 주세요.", "image": "assets/guide/fill_water.svg" },
+      { "order": 2, "text": "호스가 꺾이거나 눌린 곳이 없는지 확인하세요.", "image": "assets/guide/check_hose.svg" }
+    ]
+  },
+  {
+    "id": 8,
+    "error_code": "ESTOP_NEED_WARMUP_ERR",
+    "board": "DMC",
+    "severity": "WARNING",
+    "display_title": "스핀들 예열 필요 (Need Warm-up)",
+    "keywords": ["8", "예열", "웜업", "Warmup"],
+    "description": "정밀한 가공을 위해 스핀들 워밍업(준비 운동)이 필요합니다.",
+    "steps": [
+      { "order": 1, "text": "Routines 메뉴에서 'Spindle Warm-up' 기능을 실행해 주세요.", "image": "assets/guide/run_warmup.svg" }
+    ]
+  },
+  {
+    "id": 20,
+    "error_code": "ESTOP_NEED_RECOVERY",
+    "board": "DMC",
+    "severity": "WARNING",
+    "display_title": "복구 필요 (Need Recovery)",
+    "keywords": ["20", "복구", "RECOVERY"],
+    "description": "비상정지 후 복구 절차가 필요합니다.",
+    "steps": [
+      { "order": 1, "text": "터치 스크린에서 'Recovery' 또는 '복구' 버튼을 눌러주세요.", "image": "assets/guide/check_screen.svg" }
+    ]
+  },
+  {
+    "id": 102,
+    "error_code": "INIT_AXIS_X",
+    "board": "DMC",
+    "severity": "CRITICAL",
+    "display_title": "X축 초기화 실패 (X-axis Init Failed)",
+    "keywords": ["102", "초기화", "원점", "X축", "INIT"],
+    "description": "X축 모터가 원점을 잡지 못했습니다. 센서나 모터 연결을 확인해야 합니다.",
+    "steps": [
+      { "order": 1, "text": "X축 모터와 PI 센서 케이블이 빠져있는지 확인하세요.", "image": "assets/guide/check_cable_x.svg" },
+      { "order": 2, "text": "X축 레일에 끼인 이물질(가루 등)을 제거하세요.", "image": "assets/guide/clean_rail_x.svg" }
+    ]
+  },
+  {
+    "id": 103,
+    "error_code": "INIT_AXIS_Y",
+    "board": "DMC",
+    "severity": "CRITICAL",
+    "display_title": "Y축 초기화 실패 (Y-axis Init Failed)",
+    "keywords": ["103", "초기화", "원점", "Y축", "INIT"],
+    "description": "Y축 모터가 원점을 잡지 못했습니다. 센서나 모터 연결을 확인해야 합니다.",
+    "steps": [
+      { "order": 1, "text": "Y축 모터와 센서 연결 잭을 눌러서 다시 끼워보세요.", "image": "assets/guide/check_cable_y.svg" },
+      { "order": 2, "text": "Y축 이동 경로에 방해물이 없는지 확인하세요.", "image": "assets/guide/clean_rail_y.svg" }
+    ]
+  },
+  {
+    "id": 104,
+    "error_code": "INIT_AXIS_Z",
+    "board": "DMC",
+    "severity": "CRITICAL",
+    "display_title": "Z축 초기화 실패 (Z-axis Init Failed)",
+    "keywords": ["104", "초기화", "원점", "Z축", "INIT"],
+    "description": "Z축(상하 이동) 모터가 원점을 잡지 못했습니다.",
+    "steps": [
+      { "order": 1, "text": "Z축 모터 케이블 연결 상태를 점검하세요.", "image": "assets/guide/check_cable_z.svg" }
+    ]
+  },
+  {
+    "id": 105,
+    "error_code": "INIT_AXIS_A",
+    "board": "DMC",
+    "severity": "CRITICAL",
+    "display_title": "A축 초기화 실패 (A-axis Init Failed)",
+    "keywords": ["105", "초기화", "원점", "A축", "INIT"],
+    "description": "A축(회전) 모터가 원점을 잡지 못했습니다.",
+    "steps": [
+      { "order": 1, "text": "A축 모터 케이블 연결 상태를 점검하세요.", "image": null }
+    ]
+  },
+  {
+    "id": 111,
+    "error_code": "COMM_FAIL_T1",
+    "board": "BLC",
+    "severity": "CRITICAL",
+    "display_title": "T1 스핀들 통신 실패 (Commutation Fail)",
+    "keywords": ["111", "T1", "통신", "COMM", "스핀들"],
+    "description": "1번 스핀들의 정류(Commutation) 과정에서 오류가 발생했습니다.",
+    "steps": [
+      { "order": 1, "text": "T1 스핀들 케이블을 분리했다가 다시 꽉 연결하세요.", "image": "assets/guide/reconnect_spindle.svg" },
+      { "order": 2, "text": "해결되지 않으면 로그를 보내주세요 (보드 점검 필요).", "image": "assets/guide/report_log.svg" }
+    ]
+  },
+  {
+    "id": 112,
+    "error_code": "COMM_FAIL_T2",
+    "board": "BLC",
+    "severity": "CRITICAL",
+    "display_title": "T2 스핀들 통신 실패 (Commutation Fail)",
+    "keywords": ["112", "T2", "통신", "COMM", "스핀들"],
+    "description": "2번 스핀들의 정류(Commutation) 과정에서 오류가 발생했습니다.",
+    "steps": [
+      { "order": 1, "text": "T2 스핀들 케이블을 분리했다가 다시 꽉 연결하세요.", "image": "assets/guide/reconnect_spindle.svg" },
+      { "order": 2, "text": "해결되지 않으면 로그를 보내주세요 (보드 점검 필요).", "image": "assets/guide/report_log.svg" }
+    ]
+  },
+  {
+    "id": 113,
+    "error_code": "COMM_FAIL_T3",
+    "board": "BLC",
+    "severity": "CRITICAL",
+    "display_title": "T3 스핀들 통신 실패 (Commutation Fail)",
+    "keywords": ["113", "T3", "통신", "COMM", "스핀들"],
+    "description": "3번 스핀들의 정류(Commutation) 과정에서 오류가 발생했습니다.",
+    "steps": [
+      { "order": 1, "text": "T3 스핀들 케이블을 분리했다가 다시 꽉 연결하세요.", "image": "assets/guide/reconnect_spindle.svg" },
+      { "order": 2, "text": "해결되지 않으면 로그를 보내주세요 (보드 점검 필요).", "image": "assets/guide/report_log.svg" }
+    ]
+  },
+  {
+    "id": 114,
+    "error_code": "COMM_FAIL_T4",
+    "board": "BLC",
+    "severity": "CRITICAL",
+    "display_title": "T4 스핀들 통신 실패 (Commutation Fail)",
+    "keywords": ["114", "T4", "통신", "COMM", "스핀들"],
+    "description": "4번 스핀들의 정류(Commutation) 과정에서 오류가 발생했습니다.",
+    "steps": [
+      { "order": 1, "text": "T4 스핀들 케이블을 분리했다가 다시 꽉 연결하세요.", "image": "assets/guide/reconnect_spindle.svg" },
+      { "order": 2, "text": "해결되지 않으면 로그를 보내주세요 (보드 점검 필요).", "image": "assets/guide/report_log.svg" }
+    ]
+  },
+  {
+    "id": 121,
+    "error_code": "HALL_ABNORMAL_T1",
+    "board": "BLC",
+    "severity": "CRITICAL",
+    "display_title": "T1 홀센서 이상 (Hall Sensor Error)",
+    "keywords": ["121", "T1", "센서", "홀센서", "Hall"],
+    "description": "1번 스핀들의 회전 감지 센서(Hall Sensor) 신호가 이상합니다.",
+    "steps": [
+      { "order": 1, "text": "T1 스핀들 케이블을 분리했다가 다시 꽉 연결하세요.", "image": "assets/guide/reconnect_spindle.svg" },
+      { "order": 2, "text": "해결되지 않으면 로그를 보내주세요 (보드 점검 필요).", "image": "assets/guide/report_log.svg" }
+    ]
+  },
+  {
+    "id": 122,
+    "error_code": "HALL_ABNORMAL_T2",
+    "board": "BLC",
+    "severity": "CRITICAL",
+    "display_title": "T2 홀센서 이상 (Hall Sensor Error)",
+    "keywords": ["122", "T2", "센서", "홀센서", "Hall"],
+    "description": "2번 스핀들의 회전 감지 센서(Hall Sensor) 신호가 이상합니다.",
+    "steps": [
+      { "order": 1, "text": "T2 스핀들 케이블을 분리했다가 다시 꽉 연결하세요.", "image": "assets/guide/reconnect_spindle.svg" },
+      { "order": 2, "text": "해결되지 않으면 로그를 보내주세요 (보드 점검 필요).", "image": "assets/guide/report_log.svg" }
+    ]
+  },
+  {
+    "id": 123,
+    "error_code": "HALL_ABNORMAL_T3",
+    "board": "BLC",
+    "severity": "CRITICAL",
+    "display_title": "T3 홀센서 이상 (Hall Sensor Error)",
+    "keywords": ["123", "T3", "센서", "홀센서", "Hall"],
+    "description": "3번 스핀들의 회전 감지 센서(Hall Sensor) 신호가 이상합니다.",
+    "steps": [
+      { "order": 1, "text": "T3 스핀들 케이블을 분리했다가 다시 꽉 연결하세요.", "image": "assets/guide/reconnect_spindle.svg" },
+      { "order": 2, "text": "해결되지 않으면 로그를 보내주세요 (보드 점검 필요).", "image": "assets/guide/report_log.svg" }
+    ]
+  },
+  {
+    "id": 124,
+    "error_code": "HALL_ABNORMAL_T4",
+    "board": "BLC",
+    "severity": "CRITICAL",
+    "display_title": "T4 홀센서 이상 (Hall Sensor Error)",
+    "keywords": ["124", "T4", "센서", "홀센서", "Hall"],
+    "description": "4번 스핀들의 회전 감지 센서(Hall Sensor) 신호가 이상합니다.",
+    "steps": [
+      { "order": 1, "text": "T4 스핀들 케이블을 분리했다가 다시 꽉 연결하세요.", "image": "assets/guide/reconnect_spindle.svg" },
+      { "order": 2, "text": "해결되지 않으면 로그를 보내주세요 (보드 점검 필요).", "image": "assets/guide/report_log.svg" }
+    ]
+  },
+  {
+    "id": 131,
+    "error_code": "LOW_VOLTAGE_SUB",
+    "board": "BLC",
+    "severity": "CRITICAL",
+    "display_title": "서브 저전압 (Low Voltage SUB)",
+    "keywords": ["131", "전압", "저전압", "SUB", "서브"],
+    "description": "서브 전원 전압이 낮습니다.",
+    "steps": [
+      { "order": 1, "text": "장비 전원을 껐다가 다시 켜주세요.", "image": "assets/guide/power_reset.svg" },
+      { "order": 2, "text": "해결되지 않으면 로그를 보내주세요 (전원부 점검 필요).", "image": "assets/guide/report_log.svg" }
+    ]
+  },
+  {
+    "id": 132,
+    "error_code": "LOW_VOLTAGE_MAIN",
+    "board": "BLC",
+    "severity": "CRITICAL",
+    "display_title": "메인 저전압 (Low Voltage MAIN)",
+    "keywords": ["132", "전압", "저전압", "MAIN", "메인"],
+    "description": "메인 전원 전압이 낮습니다.",
+    "steps": [
+      { "order": 1, "text": "장비 전원을 껐다가 다시 켜주세요.", "image": "assets/guide/power_reset.svg" },
+      { "order": 2, "text": "해결되지 않으면 로그를 보내주세요 (전원부 점검 필요).", "image": "assets/guide/report_log.svg" }
+    ]
+  },
+  {
+    "id": 141,
+    "error_code": "LOW_VOLTAGE_GATE_SUB",
+    "board": "BLC",
+    "severity": "CRITICAL",
+    "display_title": "게이트 서브 저전압 (Low Voltage Gate SUB)",
+    "keywords": ["141", "전압", "게이트", "SUB"],
+    "description": "게이트 드라이버 서브 전압이 낮습니다.",
+    "steps": [
+      { "order": 1, "text": "장비 전원을 껐다가 다시 켜주세요.", "image": "assets/guide/power_reset.svg" },
+      { "order": 2, "text": "해결되지 않으면 로그를 보내주세요 (보드 점검 필요).", "image": "assets/guide/report_log.svg" }
+    ]
+  },
+  {
+    "id": 142,
+    "error_code": "LOW_VOLTAGE_GATE_MAIN",
+    "board": "BLC",
+    "severity": "CRITICAL",
+    "display_title": "게이트 메인 저전압 (Low Voltage Gate MAIN)",
+    "keywords": ["142", "전압", "게이트", "MAIN"],
+    "description": "게이트 드라이버 메인 전압이 낮습니다.",
+    "steps": [
+      { "order": 1, "text": "장비 전원을 껐다가 다시 켜주세요.", "image": "assets/guide/power_reset.svg" },
+      { "order": 2, "text": "해결되지 않으면 로그를 보내주세요 (보드 점검 필요).", "image": "assets/guide/report_log.svg" }
+    ]
+  },
+  {
+    "id": 199,
+    "error_code": "WATER_LEAK_DETECTED",
+    "board": "BLC",
+    "severity": "CRITICAL",
+    "display_title": "누수 감지됨 (Water Leak Detected)",
+    "keywords": ["199", "물", "누수", "샘", "Leak"],
+    "description": "장비 내부 바닥에 물이 고여 누수 센서가 울렸습니다.",
+    "steps": [
+      { "order": 1, "text": "즉시 장비 전원을 끄고 물 공급을 중단하세요.", "image": "assets/guide/power_off.svg" },
+      { "order": 2, "text": "장비 내부 바닥의 물기를 닦아내고 건조시킨 뒤 재부팅하세요.", "image": "assets/guide/dry_floor.svg" }
+    ]
+  },
+  {
+    "id": 200,
+    "error_code": "BLC_OC_PIN_ERR",
+    "board": "DMC",
+    "severity": "CRITICAL",
+    "display_title": "BLDC 과전류 핀 에러 (BLDC OC Pin Error)",
+    "keywords": ["200", "BLDC", "과전류", "OC", "PIN"],
+    "description": "BLDC 모터 과전류 감지 핀에서 에러가 발생했습니다.",
+    "steps": [
+      { "order": 1, "text": "장비 전원을 껐다가 다시 켜주세요.", "image": "assets/guide/power_reset.svg" },
+      { "order": 2, "text": "해결되지 않으면 로그를 보내주세요.", "image": "assets/guide/report_log.svg" }
+    ]
+  },
+  {
+    "id": 201,
+    "error_code": "OVERCURRENT_T1",
+    "board": "BLC",
+    "severity": "WARNING",
+    "display_title": "T1 스핀들 과전류 (Over Current)",
+    "keywords": ["201", "과부하", "T1", "전류", "과전류"],
+    "description": "1번 스핀들에 과전류가 감지되었습니다. 툴 상태를 확인해주세요.",
+    "steps": [
+      { "order": 1, "text": "T1 툴(Bur)이 마모되었거나 부러졌는지 확인하세요.", "image": "assets/guide/check_bur_wear.svg" },
+      { "order": 2, "text": "가공 속도를 10% 정도 낮춰보세요.", "image": null }
+    ]
+  },
+  {
+    "id": 202,
+    "error_code": "OVERCURRENT_T2",
+    "board": "BLC",
+    "severity": "WARNING",
+    "display_title": "T2 스핀들 과전류 (Over Current)",
+    "keywords": ["202", "과부하", "T2", "전류", "과전류"],
+    "description": "2번 스핀들에 과전류가 감지되었습니다. 툴 상태를 확인해주세요.",
+    "steps": [
+      { "order": 1, "text": "T2 툴(Bur)의 날 상태를 점검하고 교체하세요.", "image": "assets/guide/check_bur_wear.svg" }
+    ]
+  },
+  {
+    "id": 203,
+    "error_code": "OVERCURRENT_T3",
+    "board": "BLC",
+    "severity": "WARNING",
+    "display_title": "T3 스핀들 과전류 (Over Current)",
+    "keywords": ["203", "과부하", "T3", "전류", "과전류"],
+    "description": "3번 스핀들에 과전류가 감지되었습니다. 툴 상태를 확인해주세요.",
+    "steps": [
+      { "order": 1, "text": "T3 툴(Bur) 교체 및 콜릿 체결 상태를 확인하세요.", "image": "assets/guide/check_bur_wear.svg" }
+    ]
+  },
+  {
+    "id": 204,
+    "error_code": "OVERCURRENT_T4",
+    "board": "BLC",
+    "severity": "WARNING",
+    "display_title": "T4 스핀들 과전류 (Over Current)",
+    "keywords": ["204", "과부하", "T4", "전류", "과전류"],
+    "description": "4번 스핀들에 과전류가 감지되었습니다. 툴 상태를 확인해주세요.",
+    "steps": [
+      { "order": 1, "text": "T4 툴(Bur)이 마모되었거나 부러졌는지 확인하세요.", "image": "assets/guide/check_bur_wear.svg" },
+      { "order": 2, "text": "툴이 콜릿 안쪽까지 완전히 밀착되어 잠겨 있는지 확인하세요.", "image": null }
+    ]
+  },
+  {
+    "id": 210,
+    "error_code": "BLC_OC_NOISE_ERR",
+    "board": "DMC",
+    "severity": "WARNING",
+    "display_title": "BLDC 과전류 노이즈 에러 (BLDC OC Noise)",
+    "keywords": ["210", "BLDC", "노이즈", "OC"],
+    "description": "BLDC 모터에서 과전류 노이즈가 감지되었습니다.",
+    "steps": [
+      { "order": 1, "text": "장비 전원을 껐다가 다시 켜주세요.", "image": "assets/guide/power_reset.svg" }
+    ]
+  },
+  {
+    "id": 301,
+    "error_code": "SPI_TxRx_ERR",
+    "board": "DMC",
+    "severity": "CRITICAL",
+    "display_title": "SPI 통신 에러 (SPI TxRx Error)",
+    "keywords": ["301", "SPI", "통신", "에러"],
+    "description": "메인보드와 서브보드 간 SPI 통신에 오류가 발생했습니다.",
+    "steps": [
+      { "order": 1, "text": "장비 전원을 껐다가 다시 켜주세요.", "image": "assets/guide/power_reset.svg" },
+      { "order": 2, "text": "해결되지 않으면 로그를 보내주세요 (보드 간 케이블 점검 필요).", "image": "assets/guide/report_log.svg" }
+    ]
+  },
+  {
+    "id": 311,
+    "error_code": "ETHERNET_RX_DATA_OVER",
+    "board": "DMC",
+    "severity": "WARNING",
+    "display_title": "이더넷 수신 오버플로우 (Ethernet RX Overflow)",
+    "keywords": ["311", "이더넷", "Ethernet", "통신", "오버플로우"],
+    "description": "이더넷 수신 버퍼가 넘쳤습니다.",
+    "steps": [
+      { "order": 1, "text": "LAN 케이블 연결 상태를 확인하세요.", "image": null },
+      { "order": 2, "text": "프로그램을 재시작하세요.", "image": "assets/guide/restart_app.svg" }
+    ]
+  },
+  {
+    "id": 401,
+    "error_code": "MOTOR_INDEX_ERR",
+    "board": "DMC",
+    "severity": "WARNING",
+    "display_title": "모터 인덱스 에러 (Motor Index Error)",
+    "keywords": ["401", "모터", "인덱스", "에러"],
+    "description": "잘못된 모터 인덱스가 입력되었습니다.",
+    "steps": [
+      { "order": 1, "text": "프로그램을 재시작하세요.", "image": "assets/guide/restart_app.svg" },
+      { "order": 2, "text": "해결되지 않으면 로그를 보내주세요.", "image": "assets/guide/report_log.svg" }
+    ]
+  },
+  {
+    "id": 402,
+    "error_code": "MOTOR_INPUT_PULSE_ERR",
+    "board": "DMC",
+    "severity": "WARNING",
+    "display_title": "모터 펄스 입력 에러 (Motor Pulse Error)",
+    "keywords": ["402", "모터", "펄스", "에러"],
+    "description": "모터 펄스 입력값에 오류가 있습니다.",
+    "steps": [
+      { "order": 1, "text": "프로그램을 재시작하세요.", "image": "assets/guide/restart_app.svg" }
+    ]
+  },
+  {
+    "id": 403,
+    "error_code": "MOTOR_INPUT_RANGE_ERR",
+    "board": "DMC",
+    "severity": "WARNING",
+    "display_title": "모터 입력 범위 에러 (Motor Range Error)",
+    "keywords": ["403", "모터", "범위", "에러"],
+    "description": "모터 입력값이 허용 범위를 벗어났습니다.",
+    "steps": [
+      { "order": 1, "text": "프로그램을 재시작하세요.", "image": "assets/guide/restart_app.svg" }
+    ]
+  },
+  {
+    "id": 404,
+    "error_code": "MOTOR_X_STEP_OVER_ERR",
+    "board": "DMC",
+    "severity": "WARNING",
+    "display_title": "X축 스텝 오버 에러 (X Step Over)",
+    "keywords": ["404", "X축", "스텝", "오버"],
+    "description": "X축 이동량이 한계를 초과했습니다.",
+    "steps": [
+      { "order": 1, "text": "가공 데이터를 확인하세요.", "image": null },
+      { "order": 2, "text": "장비를 재시작하세요.", "image": "assets/guide/power_reset.svg" }
+    ]
+  },
+  {
+    "id": 405,
+    "error_code": "MOTOR_Y_STEP_OVER_ERR",
+    "board": "DMC",
+    "severity": "WARNING",
+    "display_title": "Y축 스텝 오버 에러 (Y Step Over)",
+    "keywords": ["405", "Y축", "스텝", "오버"],
+    "description": "Y축 이동량이 한계를 초과했습니다.",
+    "steps": [
+      { "order": 1, "text": "가공 데이터를 확인하세요.", "image": null },
+      { "order": 2, "text": "장비를 재시작하세요.", "image": "assets/guide/power_reset.svg" }
+    ]
+  },
+  {
+    "id": 406,
+    "error_code": "MOTOR_Z_STEP_OVER_ERR",
+    "board": "DMC",
+    "severity": "WARNING",
+    "display_title": "Z축 스텝 오버 에러 (Z Step Over)",
+    "keywords": ["406", "Z축", "스텝", "오버"],
+    "description": "Z축 이동량이 한계를 초과했습니다.",
+    "steps": [
+      { "order": 1, "text": "가공 데이터를 확인하세요.", "image": null },
+      { "order": 2, "text": "장비를 재시작하세요.", "image": "assets/guide/power_reset.svg" }
+    ]
+  },
+  {
+    "id": 407,
+    "error_code": "MOTOR_A_STEP_OVER_ERR",
+    "board": "DMC",
+    "severity": "WARNING",
+    "display_title": "A축 스텝 오버 에러 (A Step Over)",
+    "keywords": ["407", "A축", "스텝", "오버"],
+    "description": "A축 이동량이 한계를 초과했습니다.",
+    "steps": [
+      { "order": 1, "text": "가공 데이터를 확인하세요.", "image": null },
+      { "order": 2, "text": "장비를 재시작하세요.", "image": "assets/guide/power_reset.svg" }
+    ]
+  },
+  {
+    "id": 501,
+    "error_code": "T1_TOOL_EQUIP_ERROR",
+    "board": "DMC",
+    "severity": "WARNING",
+    "display_title": "T1 툴 장착 에러 (T1 Tool Equip Error)",
+    "keywords": ["501", "툴", "T1", "장착", "에러"],
+    "description": "1번 툴이 제대로 장착되지 않았습니다.",
+    "steps": [
+      { "order": 1, "text": "1번 자리에 툴이 올바르게 장착되어 있는지 확인하세요.", "image": null },
+      { "order": 2, "text": "툴 홀더를 청소하고 다시 장착하세요.", "image": null }
+    ]
+  },
+  {
+    "id": 502,
+    "error_code": "T2_TOOL_EQUIP_ERROR",
+    "board": "DMC",
+    "severity": "WARNING",
+    "display_title": "T2 툴 장착 에러 (T2 Tool Equip Error)",
+    "keywords": ["502", "툴", "T2", "장착", "에러"],
+    "description": "2번 툴이 제대로 장착되지 않았습니다.",
+    "steps": [
+      { "order": 1, "text": "2번 자리에 툴이 올바르게 장착되어 있는지 확인하세요.", "image": null }
+    ]
+  },
+  {
+    "id": 503,
+    "error_code": "T3_TOOL_EQUIP_ERROR",
+    "board": "DMC",
+    "severity": "WARNING",
+    "display_title": "T3 툴 장착 에러 (T3 Tool Equip Error)",
+    "keywords": ["503", "툴", "T3", "장착", "에러"],
+    "description": "3번 툴이 제대로 장착되지 않았습니다.",
+    "steps": [
+      { "order": 1, "text": "3번 자리에 툴이 올바르게 장착되어 있는지 확인하세요.", "image": null }
+    ]
+  },
+  {
+    "id": 504,
+    "error_code": "T4_TOOL_EQUIP_ERROR",
+    "board": "DMC",
+    "severity": "WARNING",
+    "display_title": "T4 툴 장착 에러 (T4 Tool Equip Error)",
+    "keywords": ["504", "툴", "T4", "장착", "에러"],
+    "description": "4번 툴이 제대로 장착되지 않았습니다.",
+    "steps": [
+      { "order": 1, "text": "4번 자리에 툴이 올바르게 장착되어 있는지 확인하세요.", "image": null }
+    ]
+  },
+  {
+    "id": 505,
+    "error_code": "TOOL_SELECT_ERROR",
+    "board": "DMC",
+    "severity": "WARNING",
+    "display_title": "툴 선택 에러 (Tool Select Error)",
+    "keywords": ["505", "툴", "선택", "에러"],
+    "description": "툴 선택 과정에서 오류가 발생했습니다.",
+    "steps": [
+      { "order": 1, "text": "CAM 설정에서 툴 번호를 확인하세요.", "image": null }
+    ]
+  },
+  {
+    "id": 506,
+    "error_code": "TOOL_DETECT_ERROR",
+    "board": "DMC",
+    "severity": "WARNING",
+    "display_title": "툴 감지 에러 (Tool Detect Error)",
+    "keywords": ["506", "툴", "감지", "에러"],
+    "description": "툴 감지 센서에서 오류가 발생했습니다.",
+    "steps": [
+      { "order": 1, "text": "툴 센서 부분을 청소하세요.", "image": null },
+      { "order": 2, "text": "툴을 다시 장착해 보세요.", "image": null }
+    ]
+  },
+  {
+    "id": 601,
+    "error_code": "BLOCK_EQUIP_ERROR",
+    "board": "DMC",
+    "severity": "WARNING",
+    "display_title": "블록 장착 에러 (Block Equip Error)",
+    "keywords": ["601", "블록", "장착", "에러"],
+    "description": "블록(소재)이 제대로 장착되지 않았습니다.",
+    "steps": [
+      { "order": 1, "text": "블록이 홀더에 확실히 고정되어 있는지 확인하세요.", "image": null },
+      { "order": 2, "text": "블록 센서 부분을 청소하세요.", "image": null }
+    ]
+  },
+  {
+    "id": 701,
+    "error_code": "TOOL_OR_BLOCK_NO_EQUIPPED_MAIN",
+    "board": "DMC",
+    "severity": "WARNING",
+    "display_title": "메인 툴/블록 미장착 (Empty Main)",
+    "keywords": ["701", "툴", "블록", "없음", "메인"],
+    "description": "메인 가공 위치에 툴이나 블록이 감지되지 않습니다.",
+    "steps": [
+      { "order": 1, "text": "해당 위치에 블록(소재)이나 툴이 빠져있는지 확인하세요.", "image": null },
+      { "order": 2, "text": "장착되어 있다면, 센서 표면을 닦아주세요.", "image": null }
+    ]
+  },
+  {
+    "id": 702,
+    "error_code": "TOOL_OR_BLOCK_NO_EQUIPPED_SUB",
+    "board": "DMC",
+    "severity": "WARNING",
+    "display_title": "서브 툴/블록 미장착 (Empty Sub)",
+    "keywords": ["702", "툴", "블록", "없음", "서브"],
+    "description": "서브 가공 위치에 툴이나 블록이 감지되지 않습니다.",
+    "steps": [
+      { "order": 1, "text": "해당 위치에 블록(소재)이나 툴이 빠져있는지 확인하세요.", "image": null }
+    ]
+  },
+  {
+    "id": 901,
+    "error_code": "NC_INPUT_DATA_ERR_AT_TIMER",
+    "board": "DMC",
+    "severity": "WARNING",
+    "display_title": "NC 입력 데이터 에러 (NC Input Error)",
+    "keywords": ["901", "NC", "입력", "데이터", "에러"],
+    "description": "NC 코드 입력 타이머에서 데이터 오류가 발생했습니다.",
+    "steps": [
+      { "order": 1, "text": "가공 파일을 다시 전송해 보세요.", "image": null },
+      { "order": 2, "text": "해결되지 않으면 로그를 보내주세요.", "image": "assets/guide/report_log.svg" }
+    ]
+  },
+  {
+    "id": 4001,
+    "error_code": "CALIB_SCALE_RANGE_ERR",
+    "board": "DMC",
+    "severity": "WARNING",
+    "display_title": "캘리브레이션 범위 오류 (Calib Range Error)",
+    "keywords": ["4001", "캘리브레이션", "보정", "범위", "실패"],
+    "description": "오토 캘리브레이션 측정값이 정상 범위를 벗어났습니다.",
+    "steps": [
+      { "order": 1, "text": "지그(Jig)나 센서 위에 이물질이 있는지 확인하고 청소하세요.", "image": null },
+      { "order": 2, "text": "캘리브레이션 툴이 휘지 않았는지 확인하세요.", "image": null }
+    ]
+  },
+  {
+    "id": 4101,
+    "error_code": "CALIB_NOT_APPLY_ERR",
+    "board": "DMC",
+    "severity": "WARNING",
+    "display_title": "캘리브레이션 미적용 에러 (Calib Not Applied)",
+    "keywords": ["4101", "캘리브레이션", "미적용", "에러"],
+    "description": "캘리브레이션이 적용되지 않았습니다.",
+    "steps": [
+      { "order": 1, "text": "캘리브레이션을 다시 실행하세요.", "image": null }
+    ]
+  },
+  {
+    "id": 7000,
+    "error_code": "MOTOR_CHECK_ESTOP",
+    "board": "DMC",
+    "severity": "WARNING",
+    "display_title": "비상정지 확인 필요 (Check E-Stop)",
+    "keywords": ["7000", "비상", "정지", "확인"],
+    "description": "비상정지 상태를 확인해 주세요.",
+    "steps": [
+      { "order": 1, "text": "비상정지 버튼이 눌려있는지 확인하고 해제하세요.", "image": "assets/guide/release_estop.svg" }
+    ]
+  },
+  {
+    "id": 7001,
+    "error_code": "MOTOR_WINDOW_OPEN",
+    "board": "DMC",
+    "severity": "WARNING",
+    "display_title": "가공 중 창문 열림 (Window Open)",
+    "keywords": ["7001", "창문", "도어", "안전"],
+    "description": "모터가 도는 중에 창문이 열려 안전을 위해 정지했습니다.",
+    "steps": [
+      { "order": 1, "text": "창문을 닫고 장비의 알림 창에서 'Resume(재개)'을 눌러주세요.", "image": "assets/guide/close_window.svg" }
+    ]
+  },
+  {
+    "id": 7005,
+    "error_code": "MOTOR_NEED_PUMP_OFF",
+    "board": "DMC",
+    "severity": "INFO",
+    "display_title": "펌프 끄기 필요 (Need Pump Off)",
+    "keywords": ["7005", "펌프", "끄기"],
+    "description": "펌프를 꺼야 합니다.",
+    "steps": [
+      { "order": 1, "text": "펌프를 끄고 진행하세요.", "image": null }
+    ]
+  },
+  {
+    "id": 7100,
+    "error_code": "MOTOR_NEED_INITIAL",
+    "board": "DMC",
+    "severity": "WARNING",
+    "display_title": "초기화 필요 (Need Initialize)",
+    "keywords": ["7100", "초기화", "필요", "INIT"],
+    "description": "장비 초기화가 필요합니다.",
+    "steps": [
+      { "order": 1, "text": "터치 스크린에서 'Initialize' 또는 '초기화' 버튼을 눌러주세요.", "image": "assets/guide/check_screen.svg" }
+    ]
+  },
+  {
+    "id": 9999,
+    "error_code": "UNKNOWN_ERROR",
+    "board": "SYSTEM",
+    "severity": "SYSTEM",
+    "display_title": "등록되지 않은 에러 (Unknown Error)",
+    "keywords": ["Unknown", "알수없음", "모르는", "등록되지않은", "미등록", "9999"],
+    "description": "매뉴얼에 없는 에러 코드이거나 'Unknown' 메시지가 표시되었습니다. 버전 호환성 문제일 수 있습니다.",
+    "steps": [
+      { "order": 1, "text": "장비 소프트웨어(L-CAM) 및 펌웨어를 최신 버전으로 업데이트하세요.", "image": null },
+      { "order": 2, "text": "업데이트가 끝나면 장비 전원을 완전히 껐다가(Power Off) 다시 켜주세요.", "image": "assets/guide/power_reset.svg" },
+      { "order": 3, "text": "해결되지 않으면 로그를 보내주세요.", "image": "assets/guide/report_log.svg" }
+    ]
+  }
+]

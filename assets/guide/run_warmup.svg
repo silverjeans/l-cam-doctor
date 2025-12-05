@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#2d3748"/>
+  <rect x="80" y="50" width="240" height="180" rx="8" fill="#1a202c" stroke="#4a5568" stroke-width="2"/>
+  <rect x="100" y="70" width="200" height="30" fill="#4a5568" rx="4"/>
+  <text x="200" y="92" text-anchor="middle" fill="#a0aec0" font-family="Arial" font-size="14">Routines</text>
+  <rect x="100" y="110" width="200" height="40" fill="#3182ce" rx="4"/>
+  <text x="200" y="137" text-anchor="middle" fill="white" font-family="Arial" font-size="14" font-weight="bold">Spindle Warm-up</text>
+  <rect x="100" y="160" width="200" height="30" fill="#4a5568" rx="4"/>
+  <text x="200" y="182" text-anchor="middle" fill="#718096" font-family="Arial" font-size="12">Calibration</text>
+  <circle cx="320" cy="130" r="20" fill="#f6ad55"/>
+  <path d="M310 130 L320 140 L335 120" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="200" y="265" text-anchor="middle" fill="#a0aec0" font-family="Arial" font-size="14">Spindle Warm-up 실행</text>
+</svg>

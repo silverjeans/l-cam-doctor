@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#2d3748"/>
+  <rect x="80" y="160" width="240" height="60" fill="#4a5568" rx="4"/>
+  <ellipse cx="150" cy="175" rx="30" ry="10" fill="#63b3ed" opacity="0.5"/>
+  <ellipse cx="220" cy="180" rx="25" ry="8" fill="#63b3ed" opacity="0.5"/>
+  <ellipse cx="280" cy="175" rx="20" ry="6" fill="#63b3ed" opacity="0.5"/>
+  <rect x="120" y="80" width="20" height="80" fill="#f6ad55"/>
+  <rect x="100" y="70" width="60" height="20" fill="#dd6b20" rx="4"/>
+  <path d="M130 160 L180 145 L170 160" stroke="#48bb78" stroke-width="2" fill="none"/>
+  <text x="200" y="250" text-anchor="middle" fill="#a0aec0" font-family="Arial" font-size="14">바닥 물기 닦아내기</text>
+</svg>

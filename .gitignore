@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+out/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Package lock (optional)
+package-lock.json
+
+# .gitignore 파일 내용
+node_modules/
+dist/
+release/
+*.log
+.DS_Store
+.env
+*.exe
+*.zip
+dist/
+release/
+temp/
+electron_temp.exe

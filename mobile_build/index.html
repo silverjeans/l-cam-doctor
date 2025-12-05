@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#1e1e1e">
+  <title>L-CAM Doctor Mobile</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- ========================================
+         메인 화면 (검색 인터페이스)
+         ======================================== -->
+    <section id="main-view" class="view active">
+      <div class="main-container">
+        <!-- 로고 영역 -->
+        <div class="logo-area">
+          <div class="logo-icon">
+            <svg width="64" height="64" viewBox="0 0 80 80" fill="none">
+              <circle cx="40" cy="40" r="35" stroke="#3b82f6" stroke-width="3" fill="none"/>
+              <path d="M28 40 L36 48 L52 32" stroke="#3b82f6" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="58" cy="58" r="8" fill="#3b82f6"/>
+              <rect x="62" y="62" width="12" height="4" rx="2" fill="#3b82f6" transform="rotate(45 62 62)"/>
+            </svg>
+          </div>
+          <h1 class="app-title">L-CAM Doctor</h1>
+          <p class="app-subtitle">Mobile (CS Team)</p>
+        </div>
+
+        <!-- 검색 영역 -->
+        <div class="search-area">
+          <div class="search-box">
+            <svg class="search-icon" width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <circle cx="11" cy="11" r="7" stroke="#6b7280" stroke-width="2"/>
+              <path d="M16 16 L21 21" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <input
+              type="text"
+              id="search-input"
+              placeholder="에러 코드 또는 증상을 입력하세요"
+              autocomplete="off"
+              spellcheck="false"
+              inputmode="text"
+            >
+            <button id="clear-btn" class="clear-btn hidden" title="지우기">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M5 5 L15 15 M15 5 L5 15" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+          <p class="search-hint">예: 204, 스핀들, 과부하, Water Tank</p>
+        </div>
+
+        <!-- 검색 결과 -->
+        <div id="search-results" class="search-results hidden">
+          <div class="results-header">
+            <span id="results-count">0</span>개의 검색 결과
+          </div>
+          <ul id="results-list" class="results-list"></ul>
+        </div>
+
+        <!-- 로딩 상태 -->
+        <div id="loading" class="loading hidden">
+          <div class="loading-spinner"></div>
+          <p>데이터 로딩 중...</p>
+        </div>
+
+        <!-- 에러 상태 -->
+        <div id="error-state" class="error-state hidden">
+          <p>데이터를 불러오는데 실패했습니다.</p>
+          <button id="retry-btn" class="retry-btn">다시 시도</button>
+        </div>
+      </div>
+
+      <!-- 푸터 -->
+      <footer class="app-footer">
+        <p>L-CAM Doctor Mobile v1.0.0</p>
+        <p class="footer-contact">문의: 1588-2350</p>
+      </footer>
+    </section>
+
+    <!-- ========================================
+         솔루션 상세 화면
+         ======================================== -->
+    <section id="detail-view" class="view">
+      <div class="detail-container">
+        <!-- 뒤로가기 버튼 -->
+        <button id="back-btn" class="back-btn">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M12 4 L6 10 L12 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>검색으로 돌아가기</span>
+        </button>
+
+        <!-- 에러 헤더 -->
+        <div id="error-header" class="error-header">
+          <div class="error-header-top">
+            <span id="error-badge" class="severity-badge"></span>
+            <span id="error-id" class="error-id"></span>
+          </div>
+          <h1 id="error-title" class="error-title"></h1>
+          <p id="error-code" class="error-code"></p>
+          <p id="error-description" class="error-description"></p>
+        </div>
+
+        <!-- 해결 단계 -->
+        <div class="steps-section">
+          <h2 class="section-title">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2" stroke="currentColor" stroke-width="2"/>
+              <rect x="9" y="3" width="6" height="4" rx="1" stroke="currentColor" stroke-width="2"/>
+              <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            해결 단계
+          </h2>
+          <div id="steps-list" class="steps-list"></div>
+        </div>
+
+        <!-- 고객지원 안내 -->
+        <div class="support-section">
+          <p>위 방법으로 해결되지 않으면 고객지원팀에 문의하세요.</p>
+          <a href="tel:1588-2350" class="call-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            1588-2350 전화하기
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="mobile_script.js"></script>
+</body>
+</html>

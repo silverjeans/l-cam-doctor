@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:">
+  <title>L-CAM Doctor</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- ========================================
+         탭 네비게이션
+         ======================================== -->
+    <nav class="tab-nav">
+      <button id="tab-search" class="tab-btn active" data-tab="main-view">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="2"/>
+          <path d="M13 13 L17 17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        에러 검색
+      </button>
+      <button id="tab-analyze" class="tab-btn" data-tab="analyze-view">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <rect x="3" y="3" width="14" height="14" rx="2" stroke="currentColor" stroke-width="2" fill="none"/>
+          <path d="M7 10 L9 12 L13 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        로그 분석
+      </button>
+    </nav>
+
+    <!-- ========================================
+         메인 화면 (검색 인터페이스)
+         ======================================== -->
+    <section id="main-view" class="view active">
+      <div class="main-container">
+        <!-- 로고 영역 -->
+        <div class="logo-area">
+          <div class="logo-icon">
+            <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+              <circle cx="40" cy="40" r="35" stroke="#3b82f6" stroke-width="3" fill="none"/>
+              <path d="M28 40 L36 48 L52 32" stroke="#3b82f6" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="58" cy="58" r="8" fill="#3b82f6"/>
+              <rect x="62" y="62" width="12" height="4" rx="2" fill="#3b82f6" transform="rotate(45 62 62)"/>
+            </svg>
+          </div>
+          <h1 class="app-title">L-CAM Doctor</h1>
+          <p class="app-subtitle">덴탈 밀링머신 문제 해결 도우미</p>
+        </div>
+
+        <!-- 검색 영역 -->
+        <div class="search-area">
+          <div class="search-box">
+            <svg class="search-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <circle cx="11" cy="11" r="7" stroke="#6b7280" stroke-width="2"/>
+              <path d="M16 16 L21 21" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <input
+              type="text"
+              id="search-input"
+              placeholder="에러 코드(예: 204) 또는 증상(예: 과부하)을 입력하세요"
+              autocomplete="off"
+              spellcheck="false"
+            >
+            <button id="clear-btn" class="clear-btn hidden" title="지우기">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M5 5 L15 15 M15 5 L5 15" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 검색 결과 -->
+        <div id="search-results" class="search-results hidden">
+          <div class="results-header">
+            <span id="results-count">0</span>개의 검색 결과
+          </div>
+          <ul id="results-list" class="results-list"></ul>
+        </div>
+
+        <!-- 로그 분석 섹션 (메인 화면) -->
+        <div id="main-log-section" class="main-log-section">
+          <h3 class="main-log-title">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <rect x="3" y="3" width="16" height="16" rx="2" stroke="currentColor" stroke-width="2" fill="none"/>
+              <path d="M7 11 L9 13 L15 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            로그 분석
+          </h3>
+
+          <!-- 하이브리드 레이아웃 -->
+          <div class="main-hybrid-section">
+            <!-- [Area A] 자동 감지 리스트 -->
+            <div class="main-auto-detect-area">
+              <div class="main-area-header">
+                <span class="main-area-label">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M8 2v3M8 11v3M14 8h-3M5 8H2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    <circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/>
+                  </svg>
+                  최근 장비 로그
+                </span>
+                <button id="main-refresh-logs-btn" class="main-refresh-btn" title="새로고침">
+                  <svg width="14" height="14" viewBox="0 0 18 18" fill="none">
+                    <path d="M15 9A6 6 0 1 1 9 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M15 3v4h-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- 로그 파일 리스트 -->
+              <div id="main-log-list-section" class="main-log-list-content">
+                <ul id="main-log-file-list" class="main-log-file-list"></ul>
+              </div>
+
+              <!-- 로그 없음 상태 -->
+              <div id="main-log-empty-section" class="main-log-empty-content hidden">
+                <div class="main-empty-icon">
+                  <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                    <rect x="6" y="5" width="20" height="22" rx="2" stroke="#4b5563" stroke-width="2" fill="none"/>
+                    <path d="M11 12h10M11 17h10M11 22h6" stroke="#4b5563" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <p class="main-empty-text">감지된 로그가 없습니다</p>
+                <p class="main-empty-path-hint">로그 추출 후 아래 경로에 저장됩니다:</p>
+                <code class="main-empty-path">C:\Huvitz\Lilivis\L-CAM\log\machine_logs\Lilivis Mill</code>
+              </div>
+            </div>
+
+            <!-- [Area B] 수동 업로드 영역 -->
+            <div class="main-manual-upload-area">
+              <div id="main-log-drop-zone" class="main-log-drop-zone">
+                <input type="file" id="main-log-file-input" class="main-log-file-input" accept=".txt">
+                <div class="main-drop-zone-content">
+                  <div class="main-drop-icon">
+                    <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+                      <path d="M18 24V12M18 12L13 17M18 12L23 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M6 24v4a3 3 0 003 3h18a3 3 0 003-3v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                  <p class="main-drop-title">파일을 드래그하거나</p>
+                  <button type="button" class="main-browse-btn">파일 선택</button>
+                  <p class="main-drop-hint">* .2.txt 파일만 지원</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 분석 결과 표시 영역 (메인 화면용) -->
+          <div id="main-analysis-result-section" class="main-analysis-result-section hidden">
+            <div class="main-analysis-header">
+              <h4 class="main-analysis-title">분석 결과</h4>
+              <button id="main-back-to-list-btn" class="main-back-btn-small">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M9 2 L4 7 L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                목록으로
+              </button>
+            </div>
+            <div id="main-analysis-stats" class="main-analysis-stats"></div>
+            <div id="main-analysis-summary" class="main-analysis-summary"></div>
+          </div>
+
+          <!-- 로딩 상태 (메인 화면용) -->
+          <div id="main-analyze-loading" class="main-analyze-loading hidden">
+            <div class="loading-spinner-small"></div>
+            <span>로그 분석 중...</span>
+          </div>
+
+          <!-- 로그 추출 가이드 (메인 화면용) -->
+          <div id="main-log-guide-section" class="main-log-guide-collapsed">
+            <button id="main-toggle-guide-btn" class="main-toggle-guide-btn">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="2"/>
+                <path d="M8 5v1M8 8v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              로그 추출 방법 안내
+              <svg class="main-chevron-icon" width="12" height="12" viewBox="0 0 14 14" fill="none">
+                <path d="M4 5L7 8L10 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div id="main-guide-content" class="main-guide-content-collapsible hidden">
+              <ol class="main-guide-steps-list">
+                <li><span class="main-step-num">1</span><strong>L-CAM</strong> 프로그램의 <strong>[EXPORT]</strong> 단계로 이동</li>
+                <li><span class="main-step-num">2</span>리스트에서 본인의 <strong>장비 이름</strong>을 선택</li>
+                <li><span class="main-step-num">3</span>마우스 <strong>오른쪽 버튼(Right Click)</strong> 클릭</li>
+                <li><span class="main-step-num">4</span>메뉴에서 <strong>'Extract Machine Logs'</strong> 선택</li>
+                <li><span class="main-step-num">5</span>저장 완료 후 <strong>[새로고침]</strong> 버튼 클릭</li>
+              </ol>
+              <div class="main-guide-log-path-info">
+                <p class="main-guide-log-path-label">로그 파일 저장 위치:</p>
+                <code class="main-guide-log-path">C:\Huvitz\Lilivis\L-CAM\log\machine_logs\Lilivis Mill</code>
+                <p class="main-guide-log-path-note">※ 로그가 다른 위치에 저장되는 경우, 수동 업로드 기능을 이용해주세요.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 푸터 -->
+      <footer class="app-footer">
+        <p>L-CAM Doctor v1.0.0 | 오프라인 문제 해결 도구</p>
+      </footer>
+    </section>
+
+    <!-- ========================================
+         로그 분석 화면
+         ======================================== -->
+    <section id="analyze-view" class="view">
+      <div class="analyze-container">
+        <div class="analyze-header">
+          <h2 class="analyze-title">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <rect x="4" y="4" width="20" height="20" rx="3" stroke="#3b82f6" stroke-width="2" fill="none"/>
+              <path d="M9 14 L12 17 L19 10" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            로그 자동 분석
+          </h2>
+          <p class="analyze-subtitle">장비 로그를 분석하여 최근 7일간 발생한 에러를 자동으로 찾아드립니다.</p>
+        </div>
+
+        <!-- 하이브리드 레이아웃 컨테이너 -->
+        <div id="hybrid-section" class="hybrid-section">
+          <!-- [Area A] 자동 감지 리스트 -->
+          <div class="auto-detect-area">
+            <div class="area-header">
+              <h3 class="area-title">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M10 2v4M10 14v4M18 10h-4M6 10H2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <circle cx="10" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                최근 장비에서 생성된 로그
+              </h3>
+              <button id="refresh-logs-btn" class="refresh-btn" title="새로고침">
+                <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
+                  <path d="M15 9A6 6 0 1 1 9 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M15 3v4h-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+
+            <!-- 로그 파일 리스트 -->
+            <div id="log-list-section" class="log-list-content">
+              <ul id="log-file-list" class="log-file-list"></ul>
+            </div>
+
+            <!-- 로그 없음 상태 -->
+            <div id="log-empty-section" class="log-empty-content hidden">
+              <div class="empty-icon">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                  <rect x="8" y="6" width="24" height="28" rx="3" stroke="#4b5563" stroke-width="2" fill="none"/>
+                  <path d="M14 14h12M14 20h12M14 26h8" stroke="#4b5563" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <p class="empty-text">감지된 로그가 없습니다</p>
+              <p class="empty-hint">L-CAM에서 로그를 먼저 추출해주세요</p>
+            </div>
+          </div>
+
+          <!-- [Area B] 수동 업로드 영역 -->
+          <div class="manual-upload-area">
+            <div id="log-drop-zone" class="log-drop-zone">
+              <input type="file" id="log-file-input" class="log-file-input" accept=".txt">
+              <div class="drop-zone-content">
+                <div class="drop-icon">
+                  <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                    <path d="M24 32V16M24 16L18 22M24 16L30 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8 32v6a4 4 0 004 4h24a4 4 0 004-4v-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <p class="drop-title">다른 로그 파일을 분석하려면</p>
+                <p class="drop-subtitle">여기에 끌어다 놓으세요</p>
+                <span class="drop-divider">또는</span>
+                <button type="button" class="browse-btn">파일 선택</button>
+                <p class="drop-hint">* .2.txt 형식의 에러 로그 파일만 지원됩니다</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 로그 추출 가이드 (도움말 섹션) -->
+        <div id="log-guide-section" class="log-guide-collapsed">
+          <button id="toggle-guide-btn" class="toggle-guide-btn">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="2"/>
+              <path d="M8 5v1M8 8v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            로그 추출 방법 안내
+            <svg class="chevron-icon" width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M4 5L7 8L10 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div id="guide-content" class="guide-content-collapsible hidden">
+            <ol class="guide-steps-list">
+              <li><span class="step-num">1</span><strong>L-CAM</strong> 프로그램의 <strong>[EXPORT]</strong> 단계로 이동</li>
+              <li><span class="step-num">2</span>리스트에서 본인의 <strong>장비 이름</strong>을 선택</li>
+              <li><span class="step-num">3</span>마우스 <strong>오른쪽 버튼(Right Click)</strong> 클릭</li>
+              <li><span class="step-num">4</span>메뉴에서 <strong>'Extract Machine Logs'</strong> 선택</li>
+              <li><span class="step-num">5</span>저장 완료 후 <strong>[새로고침]</strong> 버튼 클릭</li>
+            </ol>
+            <div class="guide-log-path-info">
+              <p class="guide-log-path-label">로그 파일 저장 위치:</p>
+              <code class="guide-log-path">C:\Huvitz\Lilivis\L-CAM\log\machine_logs\Lilivis Mill</code>
+              <p class="guide-log-path-note">※ 로그가 다른 위치에 저장되는 경우, 수동 업로드 기능을 이용해주세요.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 분석 결과 표시 영역 -->
+        <div id="analysis-result-section" class="analysis-result-section hidden">
+          <div class="analysis-header">
+            <h3 class="analysis-title">분석 결과</h3>
+            <button id="back-to-list-btn" class="back-btn-small">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M10 3 L5 8 L10 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              목록으로
+            </button>
+          </div>
+          <div id="analysis-stats" class="analysis-stats"></div>
+          <div id="analysis-summary" class="analysis-summary"></div>
+          <div id="analysis-errors" class="analysis-errors"></div>
+        </div>
+
+        <!-- 로딩 상태 -->
+        <div id="analyze-loading" class="analyze-loading hidden">
+          <div class="loading-spinner"></div>
+          <p>로그 분석 중...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+         솔루션 상세 화면
+         ======================================== -->
+    <section id="detail-view" class="view">
+      <div class="detail-container">
+        <!-- 뒤로가기 버튼 -->
+        <button id="back-btn" class="back-btn">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M12 4 L6 10 L12 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>검색으로 돌아가기</span>
+        </button>
+
+        <!-- 에러 헤더 -->
+        <div id="error-header" class="error-header">
+          <div class="error-header-top">
+            <span id="error-badge" class="severity-badge"></span>
+            <span id="error-id" class="error-id"></span>
+          </div>
+          <h1 id="error-title" class="error-title"></h1>
+          <p id="error-code" class="error-code"></p>
+          <p id="error-description" class="error-description"></p>
+        </div>
+
+        <!-- 해결 단계 -->
+        <div class="steps-section">
+          <h2 class="section-title">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2" stroke="currentColor" stroke-width="2"/>
+              <rect x="9" y="3" width="6" height="4" rx="1" stroke="currentColor" stroke-width="2"/>
+              <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            해결 단계
+          </h2>
+          <div id="steps-list" class="steps-list"></div>
+        </div>
+
+        <!-- 액션 버튼 -->
+        <div class="action-buttons">
+          <button id="resolved-btn" class="btn btn-success">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M4 10 L8 14 L16 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            해결됨
+          </button>
+          <button id="not-resolved-btn" class="btn btn-warning">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="2" fill="none"/>
+              <path d="M10 6v5M10 13v1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            해결 안 됨 (로그 보내기)
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================
+         로그 리포트 모달
+         ======================================== -->
+    <div id="report-modal" class="modal hidden">
+      <div class="modal-overlay"></div>
+      <div class="modal-content">
+        <!-- 모달 헤더 -->
+        <div class="modal-header">
+          <h2 class="modal-title">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2"/>
+              <polyline points="14,2 14,8 20,8" stroke="currentColor" stroke-width="2"/>
+              <line x1="16" y1="13" x2="8" y2="13" stroke="currentColor" stroke-width="2"/>
+              <line x1="16" y1="17" x2="8" y2="17" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            로그 파일 리포트
+          </h2>
+          <button id="modal-close-btn" class="modal-close-btn" title="닫기">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M6 6 L18 18 M18 6 L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <p class="modal-subtitle">문제 해결을 위해 로그 파일을 제출해 주세요.</p>
+
+        <!-- 고객 정보 입력 -->
+        <div class="customer-info">
+          <div class="input-group">
+            <label for="customer-name">성함 <span class="required">*</span></label>
+            <input type="text" id="customer-name" placeholder="홍길동" required>
+          </div>
+          <div class="input-group">
+            <label for="company-name">업체명 <span class="required">*</span></label>
+            <input type="text" id="company-name" placeholder="OO치과" required>
+          </div>
+          <div class="input-group">
+            <label for="contact-number">연락처 <span class="required">*</span></label>
+            <input type="tel" id="contact-number" placeholder="010-1234-5678" required>
+          </div>
+        </div>
+
+        <!-- 드롭 존 -->
+        <div id="drop-zone" class="drop-zone">
+          <div class="drop-zone-content">
+            <svg class="drop-icon" width="64" height="64" viewBox="0 0 64 64" fill="none">
+              <rect x="12" y="8" width="40" height="48" rx="4" stroke="#4b5563" stroke-width="2" fill="none"/>
+              <path d="M24 32 L32 24 L40 32" stroke="#4b5563" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M32 24 L32 44" stroke="#4b5563" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <p class="drop-text">로그 파일을 이곳에 드래그하세요</p>
+            <p class="drop-hint">또는 클릭하여 파일 선택</p>
+            <p class="drop-formats">지원 형식: .log, .txt, .zip</p>
+          </div>
+          <input type="file" id="file-input" class="file-input" accept=".log,.txt,.zip">
+        </div>
+
+        <!-- 선택된 파일 정보 -->
+        <div id="file-info" class="file-info hidden">
+          <div class="file-icon">
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+              <rect x="8" y="4" width="24" height="32" rx="2" stroke="#3b82f6" stroke-width="2" fill="none"/>
+              <path d="M14 16 H26" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
+              <path d="M14 22 H26" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
+              <path d="M14 28 H22" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="file-details">
+            <p id="file-name" class="file-name"></p>
+            <p id="file-size" class="file-size"></p>
+          </div>
+          <button id="remove-file-btn" class="remove-file-btn" title="파일 제거">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M5 5 L15 15 M15 5 L5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- 제출 버튼 -->
+        <button id="submit-report-btn" class="btn btn-primary submit-btn" disabled>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M4 10 L8 14 L16 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          리포트 생성 및 저장
+        </button>
+
+        <!-- 결과 메시지 -->
+        <div id="report-result" class="report-result hidden">
+          <div class="result-icon">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="20" stroke="#10b981" stroke-width="3" fill="none"/>
+              <path d="M15 24 L21 30 L33 18" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <p id="result-message" class="result-message"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================
+         개발자 설정 모달
+         ======================================== -->
+    <div id="dev-settings-modal" class="modal hidden">
+      <div class="modal-overlay"></div>
+      <div class="modal-content dev-settings-modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" stroke="currentColor" stroke-width="2"/>
+              <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            개발자 설정
+          </h2>
+          <button id="dev-modal-close-btn" class="modal-close-btn" title="닫기">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M6 6 L18 18 M18 6 L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="dev-settings-body">
+          <div class="dev-setting-item">
+            <label for="analysis-days-input" class="dev-setting-label">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <rect x="2" y="3" width="14" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M2 7h14" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M6 1v4M12 1v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+              로그 분석 기간 (일)
+            </label>
+            <p class="dev-setting-desc">분석할 로그 기간을 설정합니다. 기본값: 7일</p>
+            <input type="number" id="analysis-days-input" class="dev-setting-input" min="1" max="365" value="7">
+          </div>
+        </div>
+
+        <div class="dev-settings-footer">
+          <button id="dev-settings-save-btn" class="btn btn-primary">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M4 9 L7 12 L14 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            저장
+          </button>
+          <button id="dev-settings-cancel-btn" class="btn btn-secondary">취소</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 토스트 알림 -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- ========================================
+         EULA 동의 모달 (최초 실행 시)
+         ======================================== -->
+    <div id="eula-modal" class="modal eula-modal hidden">
+      <div class="modal-overlay eula-overlay"></div>
+      <div class="modal-content eula-modal-content">
+        <div class="eula-header">
+          <h2 class="eula-title">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <path d="M14 4L3 24h22L14 4z" stroke="#f59e0b" stroke-width="2" fill="none"/>
+              <path d="M14 11v5M14 19v1" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            사용 전 필수 확인 (Disclaimer)
+          </h2>
+        </div>
+
+        <div class="eula-content-wrapper">
+          <div class="eula-content">
+            <h3>1. 서비스 목적 및 한계</h3>
+            <p>L-CAM Doctor(이하 "본 프로그램")는 덴탈 밀링 머신 사용자의 문제 해결을 돕기 위해 제작된 <strong>참고용 도우미 도구</strong>입니다. 본 프로그램은 일반적인 에러 코드에 대한 정보를 제공하지만, 모든 상황에 완벽하게 적용되는 해결책을 보장하지 않습니다.</p>
+
+            <h3>2. 책임의 한계</h3>
+            <p>본 프로그램에서 제공하는 정보와 해결 방법은 <strong>참고용</strong>이며, 이를 따른 결과에 대해 Huvitz 및 개발자는 어떠한 법적 책임도 지지 않습니다. 여기에는 다음이 포함되지만 이에 국한되지 않습니다:</p>
+            <ul>
+              <li>장비의 오작동, 손상 또는 파손</li>
+              <li>데이터 손실 또는 작업 지연</li>
+              <li>간접적, 부수적, 특별, 결과적 손해</li>
+            </ul>
+
+            <h3>3. 공식 지원 안내</h3>
+            <p>본 프로그램에서 제공하는 해결 방법으로 문제가 해결되지 않거나, 정확한 진단이 필요한 경우에는 반드시 <strong>Huvitz 공식 고객 지원팀</strong>에 문의하시기 바랍니다.</p>
+            <ul>
+              <li>고객지원: 1588-2350</li>
+            </ul>
+
+            <h3>4. 정보의 정확성</h3>
+            <p>본 프로그램의 정보는 작성 시점을 기준으로 하며, 실제 장비의 펌웨어 버전, 설정, 사용 환경에 따라 내용이 다를 수 있습니다. Huvitz는 사전 통지 없이 언제든지 내용을 변경할 수 있습니다.</p>
+
+            <h3>5. 동의</h3>
+            <p>본 프로그램을 사용함으로써 귀하는 위의 모든 면책 조항을 읽고 이해하였으며 이에 동의한 것으로 간주됩니다.</p>
+          </div>
+        </div>
+
+        <div class="eula-footer">
+          <label class="eula-checkbox-label">
+            <input type="checkbox" id="eula-agree-checkbox" class="eula-checkbox">
+            <span class="eula-checkbox-text">위 면책 조항을 확인했으며 이에 동의합니다.</span>
+          </label>
+          <div class="eula-buttons">
+            <button id="eula-agree-btn" class="btn btn-primary eula-agree-btn" disabled>
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <path d="M4 9 L7 12 L14 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              동의하고 시작하기
+            </button>
+            <button id="eula-exit-btn" class="btn btn-secondary eula-exit-btn">
+              종료
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

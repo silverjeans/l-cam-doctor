@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#2d3748"/>
+  <ellipse cx="200" cy="120" rx="60" ry="80" fill="#4a5568"/>
+  <ellipse cx="200" cy="80" rx="30" ry="10" fill="#718096"/>
+  <rect x="170" y="180" width="60" height="40" fill="#1a202c"/>
+  <path d="M200 220 L200 250" stroke="#f6ad55" stroke-width="6"/>
+  <rect x="190" y="250" width="20" height="10" fill="#f6ad55"/>
+  <path d="M140 200 L120 180" stroke="#48bb78" stroke-width="3"/>
+  <path d="M260 200 L280 180" stroke="#48bb78" stroke-width="3"/>
+  <text x="110" y="170" fill="#48bb78" font-family="Arial" font-size="12">분리</text>
+  <text x="270" y="170" fill="#48bb78" font-family="Arial" font-size="12">재연결</text>
+  <text x="200" y="50" text-anchor="middle" fill="#718096" font-family="Arial" font-size="14">스핀들</text>
+  <text x="200" y="285" text-anchor="middle" fill="#a0aec0" font-family="Arial" font-size="14">스핀들 케이블 재연결</text>
+</svg>

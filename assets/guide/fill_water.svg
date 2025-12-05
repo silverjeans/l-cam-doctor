@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#2d3748"/>
+  <rect x="120" y="100" width="160" height="120" rx="4" fill="#4a5568"/>
+  <rect x="130" y="110" width="140" height="100" fill="#1a202c"/>
+  <rect x="130" y="170" width="140" height="40" fill="#63b3ed" opacity="0.5"/>
+  <path d="M140 180 Q150 175, 160 180 Q170 185, 180 180 Q190 175, 200 180 Q210 185, 220 180 Q230 175, 240 180 Q250 185, 260 180" stroke="#90cdf4" stroke-width="2" fill="none"/>
+  <path d="M80 80 L100 80 L100 140 L80 140 Z" fill="#718096"/>
+  <path d="M90 140 L130 160" stroke="#63b3ed" stroke-width="3"/>
+  <ellipse cx="90" cy="75" rx="15" ry="5" fill="#4a5568"/>
+  <path d="M120 155 L140 165" stroke="#63b3ed" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="130" cy="160" r="3" fill="#63b3ed"/>
+  <circle cx="135" cy="163" r="2" fill="#63b3ed"/>
+  <text x="200" y="260" text-anchor="middle" fill="#a0aec0" font-family="Arial" font-size="14">물(냉각수) 보충하기</text>
+</svg>

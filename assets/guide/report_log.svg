@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#2d3748"/>
+  <rect x="120" y="60" width="160" height="180" rx="4" fill="#1a202c" stroke="#4a5568" stroke-width="2"/>
+  <rect x="140" y="80" width="120" height="10" fill="#4a5568"/>
+  <rect x="140" y="100" width="100" height="8" fill="#4a5568"/>
+  <rect x="140" y="115" width="110" height="8" fill="#4a5568"/>
+  <rect x="140" y="130" width="90" height="8" fill="#4a5568"/>
+  <rect x="140" y="145" width="105" height="8" fill="#4a5568"/>
+  <rect x="140" y="180" width="120" height="40" rx="4" fill="#3182ce"/>
+  <text x="200" y="207" text-anchor="middle" fill="white" font-family="Arial" font-size="14" font-weight="bold">로그 보내기</text>
+  <path d="M280 100 L320 100 L320 140 L340 120 L320 100" stroke="#f6ad55" stroke-width="2" fill="none"/>
+  <text x="320" y="160" text-anchor="middle" fill="#f6ad55" font-family="Arial" font-size="11">전송</text>
+  <text x="200" y="275" text-anchor="middle" fill="#a0aec0" font-family="Arial" font-size="14">로그 파일 보내기</text>
+</svg>

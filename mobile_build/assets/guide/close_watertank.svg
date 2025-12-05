@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#2d3748"/>
+  <rect x="80" y="80" width="240" height="140" rx="4" fill="#4a5568"/>
+  <rect x="90" y="180" width="220" height="30" rx="2" fill="#63b3ed" stroke="#3182ce" stroke-width="2"/>
+  <path d="M100 195 Q110 190, 120 195 Q130 200, 140 195 Q150 190, 160 195" stroke="#90cdf4" stroke-width="2" fill="none"/>
+  <path d="M180 195 Q190 190, 200 195 Q210 200, 220 195" stroke="#90cdf4" stroke-width="2" fill="none"/>
+  <path d="M320 195 L350 195" stroke="#48bb78" stroke-width="4" stroke-linecap="round"/>
+  <path d="M340 185 L350 195 L340 205" stroke="#48bb78" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="200" y="260" text-anchor="middle" fill="#a0aec0" font-family="Arial" font-size="14">물탱크 서랍을 밀어 닫기</text>
+  <text x="200" y="130" text-anchor="middle" fill="#718096" font-family="Arial" font-size="12">장비 본체</text>
+</svg>

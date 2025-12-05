@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#2d3748"/>
+  <rect x="180" y="60" width="20" height="180" fill="#718096" rx="2"/>
+  <rect x="200" y="60" width="8" height="180" fill="#4a5568"/>
+  <circle cx="190" cy="100" r="4" fill="#a0aec0"/>
+  <circle cx="193" cy="130" r="3" fill="#a0aec0"/>
+  <circle cx="188" cy="160" r="5" fill="#a0aec0"/>
+  <path d="M240 140 L208 140" stroke="#f56565" stroke-width="2" stroke-dasharray="4,4"/>
+  <text x="270" y="145" text-anchor="middle" fill="#f56565" font-family="Arial" font-size="12">이물질</text>
+  <ellipse cx="120" cy="140" rx="30" ry="15" fill="#4a5568" stroke="#48bb78" stroke-width="2"/>
+  <text x="120" y="145" text-anchor="middle" fill="#48bb78" font-family="Arial" font-size="10">청소</text>
+  <path d="M150" y="140 L175 140" stroke="#48bb78" stroke-width="3"/>
+  <text x="200" y="265" text-anchor="middle" fill="#a0aec0" font-family="Arial" font-size="14">Y축 레일 이물질 제거</text>
+</svg>

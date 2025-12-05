@@ -1,0 +1,55 @@
+{
+  "name": "lcam-doctor",
+  "version": "1.0.0",
+  "description": "L-CAM Doctor - 덴탈 밀링머신 오프라인 문제 해결 프로그램",
+  "main": "main.js",
+  "scripts": {
+    "start": "powershell -ExecutionPolicy Bypass -File run.ps1",
+    "dev": "powershell -ExecutionPolicy Bypass -File run-dev.ps1",
+    "build": "electron-builder --win",
+    "build:portable": "electron-builder --win portable"
+  },
+  "author": "L-CAM",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.10"
+  },
+  "build": {
+    "appId": "com.lcam.doctor",
+    "productName": "L-CAM Doctor",
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "assets/icon.ico",
+      "signAndEditExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "installerLanguages": [
+        "ko",
+        "en"
+      ],
+      "language": "1042"
+    },
+    "files": [
+      "**/*",
+      "!node_modules/.cache/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "db.json",
+        "to": "db.json"
+      },
+      {
+        "from": "assets/",
+        "to": "assets/"
+      }
+    ]
+  }
+}

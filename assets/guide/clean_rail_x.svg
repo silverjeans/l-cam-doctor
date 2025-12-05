@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#2d3748"/>
+  <rect x="60" y="130" width="280" height="20" fill="#718096" rx="2"/>
+  <rect x="60" y="150" width="280" height="8" fill="#4a5568"/>
+  <circle cx="150" cy="145" r="4" fill="#a0aec0"/>
+  <circle cx="170" cy="148" r="3" fill="#a0aec0"/>
+  <circle cx="190" cy="144" r="5" fill="#a0aec0"/>
+  <circle cx="210" cy="147" r="3" fill="#a0aec0"/>
+  <circle cx="230" cy="143" r="4" fill="#a0aec0"/>
+  <path d="M180 100 L180 130" stroke="#f56565" stroke-width="2" stroke-dasharray="4,4"/>
+  <text x="180" y="90" text-anchor="middle" fill="#f56565" font-family="Arial" font-size="12">이물질</text>
+  <path d="M280 90 L320 130" stroke="#48bb78" stroke-width="3"/>
+  <ellipse cx="270" cy="85" rx="30" ry="15" fill="#4a5568" stroke="#48bb78" stroke-width="2"/>
+  <text x="270" y="90" text-anchor="middle" fill="#48bb78" font-family="Arial" font-size="10">청소</text>
+  <text x="200" y="200" text-anchor="middle" fill="#718096" font-family="Arial" font-size="12">X축 레일</text>
+  <text x="200" y="265" text-anchor="middle" fill="#a0aec0" font-family="Arial" font-size="14">X축 레일 이물질 제거</text>
+</svg>

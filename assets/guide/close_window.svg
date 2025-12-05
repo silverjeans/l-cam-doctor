@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#2d3748"/>
+  <rect x="80" y="40" width="240" height="200" rx="4" fill="#4a5568" stroke="#718096" stroke-width="2"/>
+  <rect x="90" y="50" width="110" height="180" fill="#1a202c" stroke="#2d3748" stroke-width="1"/>
+  <rect x="200" y="50" width="110" height="180" fill="#63b3ed" opacity="0.3" stroke="#3182ce" stroke-width="2" stroke-dasharray="5,5"/>
+  <path d="M280 140 L320 140" stroke="#48bb78" stroke-width="4" stroke-linecap="round"/>
+  <path d="M310 130 L320 140 L310 150" stroke="#48bb78" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="95" cy="140" r="8" fill="#718096"/>
+  <text x="200" y="270" text-anchor="middle" fill="#a0aec0" font-family="Arial" font-size="14">창문을 꽉 닫아주세요</text>
+  <circle cx="350" cy="50" r="25" fill="#48bb78"/>
+  <path d="M340 50 L347 57 L360 44" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
