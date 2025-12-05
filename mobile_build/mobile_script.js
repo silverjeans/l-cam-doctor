@@ -72,7 +72,8 @@ async function loadErrorData() {
     }
 
     const data = await response.json();
-    state.errors = data.errors || [];
+    // db.json이 배열 형태인 경우와 { errors: [] } 형태인 경우 모두 지원
+    state.errors = Array.isArray(data) ? data : (data.errors || []);
 
     console.log(`[Mobile] Loaded ${state.errors.length} error entries`);
     showLoading(false);
