@@ -159,8 +159,12 @@ function searchErrors(query) {
     // ID (에러 코드) 검색
     if (error.id.toString() === query) return true;
 
-    // 제목 검색
-    if (error.title && error.title.toLowerCase().includes(lowerQuery)) return true;
+    // 제목 검색 (display_title 또는 title)
+    const title = error.display_title || error.title;
+    if (title && title.toLowerCase().includes(lowerQuery)) return true;
+
+    // 에러 코드명 검색 (error_code)
+    if (error.error_code && error.error_code.toLowerCase().includes(lowerQuery)) return true;
 
     // 설명 검색
     if (error.description && error.description.toLowerCase().includes(lowerQuery)) return true;
