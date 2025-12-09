@@ -69,10 +69,10 @@
     "severity": "WARNING",
     "display_title": "수압 낮음 / 냉각수 부족 (Low Water Pressure)",
     "keywords": ["6", "수압", "물", "펌프", "Water", "PUMP"],
-    "description": "냉각수 흐름이 약합니다. 물이 부족하거나 호스가 꼬였을 수 있습니다.",
+    "description": "냉각수 흐름이 약합니다. 워터탱크 물이 부족하거나 필터 청소가 필요할 수 있습니다.",
     "steps": [
-      { "order": 1, "text": "물 탱크에 물(냉각수)을 보충해 주세요.", "image": "assets/guide/fill_water.svg" },
-      { "order": 2, "text": "호스가 꺾이거나 눌린 곳이 없는지 확인하세요.", "image": "assets/guide/check_hose.svg" }
+      { "order": 1, "text": "[가공 중인 경우] 물 탱크에 물(냉각수)을 보충하고 필터를 청소한 뒤, 화면의 'Retry' 버튼을 눌러 가공을 재개하세요.", "image": "assets/guide/fill_water.svg" },
+      { "order": 2, "text": "[가공 중이 아닌 경우] 물 탱크에 물(냉각수)을 보충하고 필터를 청소한 뒤, 장비 Routines 메뉴에서 'Water Pump' 버튼을 눌러주세요.", "image": "assets/guide/fill_water.svg" }
     ]
   },
   {
@@ -96,7 +96,8 @@
     "keywords": ["20", "복구", "RECOVERY"],
     "description": "비상정지 후 복구 절차가 필요합니다.",
     "steps": [
-      { "order": 1, "text": "터치 스크린에서 'Recovery' 또는 '복구' 버튼을 눌러주세요.", "image": "assets/guide/check_screen.svg" }
+      { "order": 1, "text": "장비 전원을 완전히 껐다가 다시 켜주세요.", "image": "assets/guide/power_reset.svg" },
+      { "order": 2, "text": "전원을 껐다 켜도 동일한 문제가 발생하면 로그를 보내주세요.", "image": "assets/guide/report_log.svg" }
     ]
   },
   {
@@ -108,8 +109,10 @@
     "keywords": ["102", "초기화", "원점", "X축", "INIT"],
     "description": "X축 모터가 원점을 잡지 못했습니다. 센서나 모터 연결을 확인해야 합니다.",
     "steps": [
-      { "order": 1, "text": "X축 모터와 PI 센서 케이블이 빠져있는지 확인하세요.", "image": "assets/guide/check_cable_x.svg" },
-      { "order": 2, "text": "X축 레일에 끼인 이물질(가루 등)을 제거하세요.", "image": "assets/guide/clean_rail_x.svg" }
+      { "order": 1, "text": "장비 전원을 껐다가 다시 켜주세요.", "image": "assets/guide/power_reset.svg" },
+      { "order": 2, "text": "X축 모터와 PI 센서 케이블이 빠져있는지 확인하세요.", "image": "assets/guide/check_cable_x.svg" },
+      { "order": 3, "text": "X축 레일에 끼인 이물질(가루 등)을 제거하세요.", "image": "assets/guide/clean_rail_x.svg" },
+      { "order": 4, "text": "해결되지 않으면 로그를 보내주세요.", "image": "assets/guide/report_log.svg" }
     ]
   },
   {
@@ -121,8 +124,10 @@
     "keywords": ["103", "초기화", "원점", "Y축", "INIT"],
     "description": "Y축 모터가 원점을 잡지 못했습니다. 센서나 모터 연결을 확인해야 합니다.",
     "steps": [
-      { "order": 1, "text": "Y축 모터와 센서 연결 잭을 눌러서 다시 끼워보세요.", "image": "assets/guide/check_cable_y.svg" },
-      { "order": 2, "text": "Y축 이동 경로에 방해물이 없는지 확인하세요.", "image": "assets/guide/clean_rail_y.svg" }
+      { "order": 1, "text": "장비 전원을 껐다가 다시 켜주세요.", "image": "assets/guide/power_reset.svg" },
+      { "order": 2, "text": "Y축 모터와 센서 연결 잭을 눌러서 다시 끼워보세요.", "image": "assets/guide/check_cable_y.svg" },
+      { "order": 3, "text": "Y축 이동 경로에 방해물이 없는지 확인하세요.", "image": "assets/guide/clean_rail_y.svg" },
+      { "order": 4, "text": "해결되지 않으면 로그를 보내주세요.", "image": "assets/guide/report_log.svg" }
     ]
   },
   {
@@ -134,7 +139,9 @@
     "keywords": ["104", "초기화", "원점", "Z축", "INIT"],
     "description": "Z축(상하 이동) 모터가 원점을 잡지 못했습니다.",
     "steps": [
-      { "order": 1, "text": "Z축 모터 케이블 연결 상태를 점검하세요.", "image": "assets/guide/check_cable_z.svg" }
+      { "order": 1, "text": "장비 전원을 껐다가 다시 켜주세요.", "image": "assets/guide/power_reset.svg" },
+      { "order": 2, "text": "Z축 모터 케이블 연결 상태를 점검하세요.", "image": "assets/guide/check_cable_z.svg" },
+      { "order": 3, "text": "해결되지 않으면 로그를 보내주세요.", "image": "assets/guide/report_log.svg" }
     ]
   },
   {
@@ -146,7 +153,9 @@
     "keywords": ["105", "초기화", "원점", "A축", "INIT"],
     "description": "A축(회전) 모터가 원점을 잡지 못했습니다.",
     "steps": [
-      { "order": 1, "text": "A축 모터 케이블 연결 상태를 점검하세요.", "image": null }
+      { "order": 1, "text": "장비 전원을 껐다가 다시 켜주세요.", "image": "assets/guide/power_reset.svg" },
+      { "order": 2, "text": "A축 모터 케이블 연결 상태를 점검하세요.", "image": null },
+      { "order": 3, "text": "해결되지 않으면 로그를 보내주세요.", "image": "assets/guide/report_log.svg" }
     ]
   },
   {
@@ -154,12 +163,13 @@
     "error_code": "COMM_FAIL_T1",
     "board": "BLC",
     "severity": "CRITICAL",
-    "display_title": "T1 스핀들 통신 실패 (Commutation Fail)",
-    "keywords": ["111", "T1", "통신", "COMM", "스핀들"],
+    "display_title": "T1 스핀들 작동 실패 (Commutation Fail)",
+    "keywords": ["111", "T1", "작동", "COMM", "스핀들"],
     "description": "1번 스핀들의 정류(Commutation) 과정에서 오류가 발생했습니다.",
     "steps": [
       { "order": 1, "text": "T1 스핀들 케이블을 분리했다가 다시 꽉 연결하세요.", "image": "assets/guide/reconnect_spindle.svg" },
-      { "order": 2, "text": "해결되지 않으면 로그를 보내주세요 (보드 점검 필요).", "image": "assets/guide/report_log.svg" }
+      { "order": 2, "text": "장비 전원을 껐다가 다시 켜주세요.", "image": "assets/guide/power_reset.svg" },
+      { "order": 3, "text": "해결되지 않으면 로그를 보내주세요 (보드 점검 필요).", "image": "assets/guide/report_log.svg" }
     ]
   },
   {
@@ -167,12 +177,13 @@
     "error_code": "COMM_FAIL_T2",
     "board": "BLC",
     "severity": "CRITICAL",
-    "display_title": "T2 스핀들 통신 실패 (Commutation Fail)",
-    "keywords": ["112", "T2", "통신", "COMM", "스핀들"],
+    "display_title": "T2 스핀들 작동 실패 (Commutation Fail)",
+    "keywords": ["112", "T2", "작동", "COMM", "스핀들"],
     "description": "2번 스핀들의 정류(Commutation) 과정에서 오류가 발생했습니다.",
     "steps": [
       { "order": 1, "text": "T2 스핀들 케이블을 분리했다가 다시 꽉 연결하세요.", "image": "assets/guide/reconnect_spindle.svg" },
-      { "order": 2, "text": "해결되지 않으면 로그를 보내주세요 (보드 점검 필요).", "image": "assets/guide/report_log.svg" }
+      { "order": 2, "text": "장비 전원을 껐다가 다시 켜주세요.", "image": "assets/guide/power_reset.svg" },
+      { "order": 3, "text": "해결되지 않으면 로그를 보내주세요 (보드 점검 필요).", "image": "assets/guide/report_log.svg" }
     ]
   },
   {
@@ -180,12 +191,13 @@
     "error_code": "COMM_FAIL_T3",
     "board": "BLC",
     "severity": "CRITICAL",
-    "display_title": "T3 스핀들 통신 실패 (Commutation Fail)",
-    "keywords": ["113", "T3", "통신", "COMM", "스핀들"],
+    "display_title": "T3 스핀들 작동 실패 (Commutation Fail)",
+    "keywords": ["113", "T3", "작동", "COMM", "스핀들"],
     "description": "3번 스핀들의 정류(Commutation) 과정에서 오류가 발생했습니다.",
     "steps": [
       { "order": 1, "text": "T3 스핀들 케이블을 분리했다가 다시 꽉 연결하세요.", "image": "assets/guide/reconnect_spindle.svg" },
-      { "order": 2, "text": "해결되지 않으면 로그를 보내주세요 (보드 점검 필요).", "image": "assets/guide/report_log.svg" }
+      { "order": 2, "text": "장비 전원을 껐다가 다시 켜주세요.", "image": "assets/guide/power_reset.svg" },
+      { "order": 3, "text": "해결되지 않으면 로그를 보내주세요 (보드 점검 필요).", "image": "assets/guide/report_log.svg" }
     ]
   },
   {
@@ -193,12 +205,13 @@
     "error_code": "COMM_FAIL_T4",
     "board": "BLC",
     "severity": "CRITICAL",
-    "display_title": "T4 스핀들 통신 실패 (Commutation Fail)",
-    "keywords": ["114", "T4", "통신", "COMM", "스핀들"],
+    "display_title": "T4 스핀들 작동 실패 (Commutation Fail)",
+    "keywords": ["114", "T4", "작동", "COMM", "스핀들"],
     "description": "4번 스핀들의 정류(Commutation) 과정에서 오류가 발생했습니다.",
     "steps": [
       { "order": 1, "text": "T4 스핀들 케이블을 분리했다가 다시 꽉 연결하세요.", "image": "assets/guide/reconnect_spindle.svg" },
-      { "order": 2, "text": "해결되지 않으면 로그를 보내주세요 (보드 점검 필요).", "image": "assets/guide/report_log.svg" }
+      { "order": 2, "text": "장비 전원을 껐다가 다시 켜주세요.", "image": "assets/guide/power_reset.svg" },
+      { "order": 3, "text": "해결되지 않으면 로그를 보내주세요 (보드 점검 필요).", "image": "assets/guide/report_log.svg" }
     ]
   },
   {
@@ -210,8 +223,10 @@
     "keywords": ["121", "T1", "센서", "홀센서", "Hall"],
     "description": "1번 스핀들의 회전 감지 센서(Hall Sensor) 신호가 이상합니다.",
     "steps": [
-      { "order": 1, "text": "T1 스핀들 케이블을 분리했다가 다시 꽉 연결하세요.", "image": "assets/guide/reconnect_spindle.svg" },
-      { "order": 2, "text": "해결되지 않으면 로그를 보내주세요 (보드 점검 필요).", "image": "assets/guide/report_log.svg" }
+      { "order": 1, "text": "T1 스핀들을 손으로 돌려보세요. 뻑뻑하거나 걸리는 느낌이 있으면 스핀들 점검이 필요합니다.", "image": null },
+      { "order": 2, "text": "부드럽게 돌아가면 장비 전원을 껐다가 다시 켜주세요.", "image": "assets/guide/power_reset.svg" },
+      { "order": 3, "text": "Routines 메뉴에서 'Spindle Warm-up'을 실행하세요.", "image": "assets/guide/run_warmup.svg" },
+      { "order": 4, "text": "해결되지 않으면 로그를 보내주세요.", "image": null }
     ]
   },
   {
@@ -223,8 +238,10 @@
     "keywords": ["122", "T2", "센서", "홀센서", "Hall"],
     "description": "2번 스핀들의 회전 감지 센서(Hall Sensor) 신호가 이상합니다.",
     "steps": [
-      { "order": 1, "text": "T2 스핀들 케이블을 분리했다가 다시 꽉 연결하세요.", "image": "assets/guide/reconnect_spindle.svg" },
-      { "order": 2, "text": "해결되지 않으면 로그를 보내주세요 (보드 점검 필요).", "image": "assets/guide/report_log.svg" }
+      { "order": 1, "text": "T2 스핀들을 손으로 돌려보세요. 뻑뻑하거나 걸리는 느낌이 있으면 스핀들 점검이 필요합니다.", "image": null },
+      { "order": 2, "text": "부드럽게 돌아가면 장비 전원을 껐다가 다시 켜주세요.", "image": "assets/guide/power_reset.svg" },
+      { "order": 3, "text": "Routines 메뉴에서 'Spindle Warm-up'을 실행하세요.", "image": "assets/guide/run_warmup.svg" },
+      { "order": 4, "text": "해결되지 않으면 로그를 보내주세요.", "image": null }
     ]
   },
   {
@@ -236,8 +253,10 @@
     "keywords": ["123", "T3", "센서", "홀센서", "Hall"],
     "description": "3번 스핀들의 회전 감지 센서(Hall Sensor) 신호가 이상합니다.",
     "steps": [
-      { "order": 1, "text": "T3 스핀들 케이블을 분리했다가 다시 꽉 연결하세요.", "image": "assets/guide/reconnect_spindle.svg" },
-      { "order": 2, "text": "해결되지 않으면 로그를 보내주세요 (보드 점검 필요).", "image": "assets/guide/report_log.svg" }
+      { "order": 1, "text": "T3 스핀들을 손으로 돌려보세요. 뻑뻑하거나 걸리는 느낌이 있으면 스핀들 점검이 필요합니다.", "image": null },
+      { "order": 2, "text": "부드럽게 돌아가면 장비 전원을 껐다가 다시 켜주세요.", "image": "assets/guide/power_reset.svg" },
+      { "order": 3, "text": "Routines 메뉴에서 'Spindle Warm-up'을 실행하세요.", "image": "assets/guide/run_warmup.svg" },
+      { "order": 4, "text": "해결되지 않으면 로그를 보내주세요.", "image": null }
     ]
   },
   {
@@ -249,8 +268,10 @@
     "keywords": ["124", "T4", "센서", "홀센서", "Hall"],
     "description": "4번 스핀들의 회전 감지 센서(Hall Sensor) 신호가 이상합니다.",
     "steps": [
-      { "order": 1, "text": "T4 스핀들 케이블을 분리했다가 다시 꽉 연결하세요.", "image": "assets/guide/reconnect_spindle.svg" },
-      { "order": 2, "text": "해결되지 않으면 로그를 보내주세요 (보드 점검 필요).", "image": "assets/guide/report_log.svg" }
+      { "order": 1, "text": "T4 스핀들을 손으로 돌려보세요. 뻑뻑하거나 걸리는 느낌이 있으면 스핀들 점검이 필요합니다.", "image": null },
+      { "order": 2, "text": "부드럽게 돌아가면 장비 전원을 껐다가 다시 켜주세요.", "image": "assets/guide/power_reset.svg" },
+      { "order": 3, "text": "Routines 메뉴에서 'Spindle Warm-up'을 실행하세요.", "image": "assets/guide/run_warmup.svg" },
+      { "order": 4, "text": "해결되지 않으면 로그를 보내주세요.", "image": null }
     ]
   },
   {
@@ -340,8 +361,8 @@
     "keywords": ["201", "과부하", "T1", "전류", "과전류"],
     "description": "1번 스핀들에 과전류가 감지되었습니다. 툴 상태를 확인해주세요.",
     "steps": [
-      { "order": 1, "text": "T1 툴(Bur)이 마모되었거나 부러졌는지 확인하세요.", "image": "assets/guide/check_bur_wear.svg" },
-      { "order": 2, "text": "가공 속도를 10% 정도 낮춰보세요.", "image": null }
+      { "order": 1, "text": "T1 툴(Bur)이 마모되었거나 부러졌는지 확인하고, 콜릿에 제대로 체결되어 있는지 확인하세요.", "image": "assets/guide/check_bur_wear.svg" },
+      { "order": 2, "text": "CAM에서 타입 선택과 블록 선택이 올바른지 확인하고 데이터를 다시 전송하세요.", "image": null }
     ]
   },
   {
@@ -353,7 +374,8 @@
     "keywords": ["202", "과부하", "T2", "전류", "과전류"],
     "description": "2번 스핀들에 과전류가 감지되었습니다. 툴 상태를 확인해주세요.",
     "steps": [
-      { "order": 1, "text": "T2 툴(Bur)의 날 상태를 점검하고 교체하세요.", "image": "assets/guide/check_bur_wear.svg" }
+      { "order": 1, "text": "T2 툴(Bur)이 마모되었거나 부러졌는지 확인하고, 콜릿에 제대로 체결되어 있는지 확인하세요.", "image": "assets/guide/check_bur_wear.svg" },
+      { "order": 2, "text": "CAM에서 타입 선택과 블록 선택이 올바른지 확인하고 데이터를 다시 전송하세요.", "image": null }
     ]
   },
   {
@@ -365,7 +387,8 @@
     "keywords": ["203", "과부하", "T3", "전류", "과전류"],
     "description": "3번 스핀들에 과전류가 감지되었습니다. 툴 상태를 확인해주세요.",
     "steps": [
-      { "order": 1, "text": "T3 툴(Bur) 교체 및 콜릿 체결 상태를 확인하세요.", "image": "assets/guide/check_bur_wear.svg" }
+      { "order": 1, "text": "T3 툴(Bur)이 마모되었거나 부러졌는지 확인하고, 콜릿에 제대로 체결되어 있는지 확인하세요.", "image": "assets/guide/check_bur_wear.svg" },
+      { "order": 2, "text": "CAM에서 타입 선택과 블록 선택이 올바른지 확인하고 데이터를 다시 전송하세요.", "image": null }
     ]
   },
   {
@@ -377,8 +400,8 @@
     "keywords": ["204", "과부하", "T4", "전류", "과전류"],
     "description": "4번 스핀들에 과전류가 감지되었습니다. 툴 상태를 확인해주세요.",
     "steps": [
-      { "order": 1, "text": "T4 툴(Bur)이 마모되었거나 부러졌는지 확인하세요.", "image": "assets/guide/check_bur_wear.svg" },
-      { "order": 2, "text": "툴이 콜릿 안쪽까지 완전히 밀착되어 잠겨 있는지 확인하세요.", "image": null }
+      { "order": 1, "text": "T4 툴(Bur)이 마모되었거나 부러졌는지 확인하고, 콜릿에 제대로 체결되어 있는지 확인하세요.", "image": "assets/guide/check_bur_wear.svg" },
+      { "order": 2, "text": "CAM에서 타입 선택과 블록 선택이 올바른지 확인하고 데이터를 다시 전송하세요.", "image": null }
     ]
   },
   {
