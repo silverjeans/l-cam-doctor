@@ -77,6 +77,57 @@
         </div>
       </div>
 
+      <!-- 자료실 버튼 -->
+      <div class="docs-section">
+        <button id="docs-btn" class="docs-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>자료실</span>
+        </button>
+      </div>
+
+      <!-- 자료실 드롭다운 -->
+      <div id="docs-dropdown" class="docs-dropdown hidden">
+        <div class="docs-dropdown-header">
+          <span>문서 다운로드</span>
+          <button id="docs-close-btn" class="docs-close-btn">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M4 4 L12 12 M12 4 L4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+        <ul class="docs-list">
+          <li>
+            <a href="docs/LM-100_maintenance_guide.pdf" download class="docs-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2"/>
+                <path d="M14 2v6h6M12 18v-6M9 15l3 3 3-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <div class="docs-item-info">
+                <span class="docs-item-name">유지보수 가이드</span>
+                <span class="docs-item-desc">LM-100 유지보수 매뉴얼 (PDF)</span>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="https://3cdn.huvitz.com/lilivis/L-CAM/manual/LM-100_User_Manual_KOR.pdf" target="_blank" rel="noopener" class="docs-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2"/>
+                <path d="M14 2v6h6M10 13h4M10 17h4M8 13h.01M8 17h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <div class="docs-item-info">
+                <span class="docs-item-name">사용자 매뉴얼</span>
+                <span class="docs-item-desc">LM-100 사용자 매뉴얼 (외부 링크)</span>
+              </div>
+              <svg class="external-icon" width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+
       <!-- 푸터 -->
       <footer class="app-footer">
         <p>L-CAM Doctor Mobile v1.0.0</p>

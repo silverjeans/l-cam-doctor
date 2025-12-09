@@ -44,7 +44,12 @@ const elements = {
   // EULA
   eulaModal: document.getElementById('eula-modal'),
   eulaCheckbox: document.getElementById('eula-checkbox'),
-  eulaAgreeBtn: document.getElementById('eula-agree-btn')
+  eulaAgreeBtn: document.getElementById('eula-agree-btn'),
+
+  // 자료실
+  docsBtn: document.getElementById('docs-btn'),
+  docsDropdown: document.getElementById('docs-dropdown'),
+  docsCloseBtn: document.getElementById('docs-close-btn')
 };
 
 // ========================================
@@ -166,6 +171,10 @@ function setupEventListeners() {
 
   // 뒤로가기 (하드웨어 버튼/제스처)
   window.addEventListener('popstate', handlePopState);
+
+  // 자료실 버튼
+  elements.docsBtn.addEventListener('click', openDocsDropdown);
+  elements.docsCloseBtn.addEventListener('click', closeDocsDropdown);
 }
 
 // ========================================
@@ -370,10 +379,21 @@ function switchToMainView() {
   elements.searchInput.focus();
 }
 
-function handlePopState(event) {
+function handlePopState() {
   if (elements.detailView.classList.contains('active')) {
     switchToMainView();
   }
+}
+
+// ========================================
+// 자료실 기능
+// ========================================
+function openDocsDropdown() {
+  elements.docsDropdown.classList.remove('hidden');
+}
+
+function closeDocsDropdown() {
+  elements.docsDropdown.classList.add('hidden');
 }
 
 // ========================================
