@@ -39,7 +39,12 @@ const elements = {
   errorTitle: document.getElementById('error-title'),
   errorCode: document.getElementById('error-code'),
   errorDescription: document.getElementById('error-description'),
-  stepsList: document.getElementById('steps-list')
+  stepsList: document.getElementById('steps-list'),
+
+  // EULA
+  eulaModal: document.getElementById('eula-modal'),
+  eulaCheckbox: document.getElementById('eula-checkbox'),
+  eulaAgreeBtn: document.getElementById('eula-agree-btn')
 };
 
 // ========================================
@@ -48,6 +53,18 @@ const elements = {
 async function init() {
   console.log('[Mobile] Initializing L-CAM Doctor Mobile...');
 
+  // EULA 동의 확인
+  if (!checkEulaAgreement()) {
+    showEulaModal();
+    setupEulaEventListeners();
+    return; // EULA 동의 전까지 앱 초기화 중단
+  }
+
+  // 앱 초기화 진행
+  initializeApp();
+}
+
+async function initializeApp() {
   // 이벤트 리스너 등록
   setupEventListeners();
 
@@ -55,6 +72,35 @@ async function init() {
   await loadErrorData();
 
   console.log('[Mobile] Initialization complete');
+}
+
+// ========================================
+// EULA 관련 함수
+// ========================================
+function checkEulaAgreement() {
+  return localStorage.getItem('eula_agreed') === 'true';
+}
+
+function showEulaModal() {
+  elements.eulaModal.classList.remove('hidden');
+}
+
+function hideEulaModal() {
+  elements.eulaModal.classList.add('hidden');
+}
+
+function setupEulaEventListeners() {
+  // 체크박스 변경 시 버튼 활성화/비활성화
+  elements.eulaCheckbox.addEventListener('change', () => {
+    elements.eulaAgreeBtn.disabled = !elements.eulaCheckbox.checked;
+  });
+
+  // 동의 버튼 클릭
+  elements.eulaAgreeBtn.addEventListener('click', () => {
+    localStorage.setItem('eula_agreed', 'true');
+    hideEulaModal();
+    initializeApp();
+  });
 }
 
 // ========================================
