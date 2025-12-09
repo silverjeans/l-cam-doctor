@@ -1,0 +1,116 @@
+{
+  "lcam_software_errors": [
+    {
+      "name": "ERR_REGIST_SSHKEY_TO_KNOWNHOST",
+      "ko_message": "known host 파일에 SSH 키 등록을 실패하였습니다",
+      "en_message": "Failed to regist SSH Key in known_host file",
+      "cause": "로컬 PC의 known_hosts 파일에 밀링 기기의 SSH 관련 정보를 기록할 수 없음. 통신 환경이 갖춰지지 않았거나 로컬 PC 시스템 문제.",
+      "solution": "재시도 후 지속 발생 시 L-CAM 버전 확인 및 최신 버전 업데이트"
+    },
+    {
+      "name": "ERR_RECEIVE_CALIBDATA",
+      "ko_message": "캘리브레이션 데이터를 수신하는데 실패했습니다",
+      "en_message": "Can't receive Calibration Data",
+      "cause": "Calibration 데이터를 읽어올 수 없음. 밀링 기기에서 데이터 생성 불가 또는 통신 실패.",
+      "solution": "재시도 후 지속 발생 시 L-CAM 버전과 밀링 머신의 버전 호환 확인 및 최신 버전으로 업데이트"
+    },
+    {
+      "name": "ERR_SEND_BLOCKINFOLIST",
+      "ko_message": "블록 정보 리스트를 송신하는데 실패했습니다",
+      "en_message": "Can't transmit Block Information List",
+      "cause": "전체 블록 정보 리스트를 밀링 기기로 전송할 수 없음. L-CAM에서 파일 생성 불가 또는 통신 송신 실패.",
+      "solution": "재시도 후 지속 발생 시 L-CAM 버전과 밀링 머신의 버전 호환 확인 및 최신 버전으로 업데이트"
+    },
+    {
+      "name": "ERR_CREATE_MARGIN",
+      "ko_message": "마진라인 데이터를 생성할 수 없습니다",
+      "en_message": "Can't create Margin Line Data",
+      "cause": "마진 라인 데이터 파일 생성 불가 또는 해당 작업에 대한 마진 라인 데이터(pts 파일)가 존재하지 않음.",
+      "solution": "재시도 후 지속 발생 시 Load 된 작업에 대한 Margin Line 정보 파일 유무 확인"
+    },
+    {
+      "name": "ERR_CREATE_STL",
+      "ko_message": "STL 데이터를 생성할 수 없습니다",
+      "en_message": "Can't create STL Data",
+      "cause": "STL 파일 생성 불가. 툴 패스 생성 시 필요한 STL 데이터 파일을 생성 불가 또는 이에 필요한 파일이 존재하지 않음.",
+      "solution": "재시도 후 지속 발생 시 L-CAM 버전 확인 및 최신 버전 업데이트"
+    },
+    {
+      "name": "ERR_CREATE_PARTDEF",
+      "ko_message": "Partdef 파일을 생성할 수 없습니다",
+      "en_message": "Can't create Partdef File",
+      "cause": "Partdef 파일 생성 불가. MW 가공을 위한 partdef 데이터 파일 생성 불가 또는 필요한 파일이 없음.",
+      "solution": "재시도 후 지속 발생 시 L-CAM 버전 확인 및 최신 버전 업데이트"
+    },
+    {
+      "name": "ERR_MODIFY_MACHTOOL",
+      "ko_message": "MachineToolSet 파일을 변경할 수 없습니다",
+      "en_message": "Can't modify machineToolSet file",
+      "cause": "Machine Tool set 파일 변경 불가. MW 가공을 위한 Machine Tool set 데이터 파일 생성 불가 또는 필요한 파일이 없음.",
+      "solution": "재시도 후 지속 발생 시 L-CAM 버전 확인 및 최신 버전 업데이트"
+    },
+    {
+      "name": "ERR_SELECT_MACHTOOL",
+      "ko_message": "머신 툴(bur)을 설정할 수 없습니다",
+      "en_message": "Can't set Machine Tool",
+      "cause": "4AxChairside_Mill_T1_nc_writer.xml 파일 변경 불가. MW 가공을 위한 데이터 파일 생성 불가 또는 필요한 파일이 없음.",
+      "solution": "재시도 후 지속 발생 시 L-CAM 버전 확인 및 최신 버전 업데이트"
+    },
+    {
+      "name": "ERR_START_MW",
+      "ko_message": "툴 패스를 생성할 수 없습니다",
+      "en_message": "Can't create Tool Path",
+      "cause": "가공을 위한 툴 패스 생성 불가. 모듈웍스(MW)가 작동하지 않아 Tool path 생성이 불가.",
+      "solution": "재시도 후 지속 발생 시 L-CAM 버전 확인 및 최신 버전 업데이트"
+    },
+    {
+      "name": "ERR_MODIFY_NC",
+      "ko_message": "NC 파일을 수정할 수 없습니다",
+      "en_message": "Can't modify NC File",
+      "cause": "L-CAM에서 NC file을 생성하는데 실패.",
+      "solution": "재시도 후 지속 발생 시 L-CAM 버전 확인 및 최신 버전 업데이트"
+    },
+    {
+      "name": "ERR_SEND_NC",
+      "ko_message": "NC 파일을 송신할 수 없습니다",
+      "en_message": "Can't send NC File",
+      "cause": "L-CAM에서 통신을 통해 NC file을 밀링 기기로 송신하는데 실패.",
+      "solution": "재시도 후 지속 발생 시 L-CAM 버전 확인 및 최신 버전 업데이트"
+    },
+    {
+      "name": "ERR_CREATE_METADATA",
+      "ko_message": "메타 데이터를 생성할 수 없습니다",
+      "en_message": "Can't create Meta Data",
+      "cause": "L-CAM에서 Meta data file을 생성하는데 실패.",
+      "solution": "재시도 후 지속 발생 시 L-CAM 버전 확인 및 최신 버전 업데이트"
+    },
+    {
+      "name": "ERR_SEND_METADATA",
+      "ko_message": "메타 데이터를 송신할 수 없습니다",
+      "en_message": "Can't send Meta Data",
+      "cause": "L-CAM에서 통신을 통해 Meta data file을 밀링 기기로 송신하는데 실패.",
+      "solution": "재시도 후 지속 발생 시 L-CAM 버전 확인 및 최신 버전 업데이트"
+    },
+    {
+      "name": "ERR_READ_MACHSTATUS",
+      "ko_message": "밀링 머신의 상태를 알 수 없습니다",
+      "en_message": "Can't read Machine Status",
+      "cause": "밀링 머신으로부터 상태 정보가 담긴 파일을 수신하는데 실패.",
+      "solution": "재시도 후 지속 발생 시 L-CAM 버전과 밀링 머신의 버전 호환 확인 및 최신 버전으로 업데이트"
+    },
+    {
+      "name": "ERR_COMM_MACHINE",
+      "ko_message": "밀링 머신과 통신할 수 없습니다",
+      "en_message": "Can't communicate with Machine",
+      "cause": "밀링 머신의 전원이 꺼져있거나 통신 환경이 불안정하여 통신할 수 없음.",
+      "solution": "밀링 머신의 전원 상태 확인 및 통신 연결 상태 확인"
+    },
+    {
+      "name": "ERR_UNKNOWN",
+      "ko_message": "알 수 없는 오류가 발생하였습니다",
+      "en_message": "Unknown Error",
+      "cause": "알 수 없는 오류.",
+      "solution": "-"
+    }
+  ]
+}

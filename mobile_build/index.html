@@ -14,7 +14,27 @@
 <body>
   <div id="app">
     <!-- ========================================
-         메인 화면 (검색 인터페이스)
+         탭 네비게이션
+         ======================================== -->
+    <nav class="tab-nav">
+      <button id="tab-lm100" class="tab-btn active" data-tab="main-view">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+          <path d="M9 12h6M12 9v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span>LM-100 에러</span>
+      </button>
+      <button id="tab-lcam" class="tab-btn" data-tab="lcam-view">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+        <span>L-CAM 에러</span>
+      </button>
+    </nav>
+
+    <!-- ========================================
+         메인 화면 (LM-100 에러 검색)
          ======================================== -->
     <section id="main-view" class="view active">
       <div class="main-container">
@@ -169,6 +189,108 @@
             해결 단계
           </h2>
           <div id="steps-list" class="steps-list"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================
+         L-CAM 에러 화면
+         ======================================== -->
+    <section id="lcam-view" class="view">
+      <div class="main-container">
+        <!-- 헤더 영역 -->
+        <div class="lcam-header">
+          <h1 class="lcam-title">L-CAM 소프트웨어 에러</h1>
+          <p class="lcam-subtitle">L-CAM 사용 중 발생할 수 있는 에러 목록</p>
+        </div>
+
+        <!-- 검색 영역 -->
+        <div class="search-area">
+          <div class="search-box">
+            <svg class="search-icon" width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <circle cx="11" cy="11" r="7" stroke="#6b7280" stroke-width="2"/>
+              <path d="M16 16 L21 21" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <input
+              type="text"
+              id="lcam-search-input"
+              placeholder="에러명 또는 메시지 검색"
+              autocomplete="off"
+              spellcheck="false"
+              inputmode="text"
+            >
+            <button id="lcam-clear-btn" class="clear-btn hidden" title="지우기">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M5 5 L15 15 M15 5 L5 15" stroke="#6b7280" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- 에러 목록 -->
+        <div id="lcam-error-list" class="lcam-error-list">
+          <!-- JS로 렌더링 -->
+        </div>
+
+        <!-- 로딩 상태 -->
+        <div id="lcam-loading" class="loading hidden">
+          <div class="loading-spinner"></div>
+          <p>데이터 로딩 중...</p>
+        </div>
+      </div>
+
+      <!-- 푸터 -->
+      <footer class="app-footer">
+        <p>L-CAM Doctor Mobile v1.0.0</p>
+      </footer>
+    </section>
+
+    <!-- ========================================
+         L-CAM 에러 상세 화면
+         ======================================== -->
+    <section id="lcam-detail-view" class="view">
+      <div class="detail-container">
+        <!-- 뒤로가기 버튼 -->
+        <button id="lcam-back-btn" class="back-btn">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M12 4 L6 10 L12 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>목록으로 돌아가기</span>
+        </button>
+
+        <!-- 에러 헤더 -->
+        <div id="lcam-error-header" class="error-header">
+          <div class="error-header-top">
+            <span class="severity-badge info">소프트웨어</span>
+          </div>
+          <h1 id="lcam-error-name" class="error-title"></h1>
+          <p id="lcam-error-message" class="error-code"></p>
+        </div>
+
+        <!-- 원인 -->
+        <div class="lcam-info-section">
+          <h2 class="section-title">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+              <path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            원인
+          </h2>
+          <div id="lcam-error-cause" class="lcam-info-content"></div>
+        </div>
+
+        <!-- 해결 방법 -->
+        <div class="lcam-info-section">
+          <h2 class="section-title">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2" stroke="currentColor" stroke-width="2"/>
+              <rect x="9" y="3" width="6" height="4" rx="1" stroke="currentColor" stroke-width="2"/>
+              <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            해결 방법
+          </h2>
+          <div id="lcam-error-solution" class="lcam-info-content"></div>
         </div>
 
       </div>

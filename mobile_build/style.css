@@ -81,6 +81,56 @@ body {
 }
 
 /* ========================================
+   탭 네비게이션
+   ======================================== */
+.tab-nav {
+  display: flex;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  padding: calc(var(--safe-area-top) + 8px) 8px 8px;
+  gap: 8px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.tab-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 12px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--border-radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.tab-btn:active {
+  background: var(--bg-hover);
+}
+
+.tab-btn.active {
+  background: var(--bg-tertiary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+.tab-btn.active svg {
+  color: var(--color-primary);
+}
+
+.tab-btn svg {
+  flex-shrink: 0;
+  color: var(--text-muted);
+}
+
+/* ========================================
    Views (화면 전환)
    ======================================== */
 .view {
@@ -102,7 +152,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: calc(40px + var(--safe-area-top)) 16px 24px;
+  padding: 24px 16px 24px;
   width: 100%;
   max-width: 100%;
 }
@@ -1007,4 +1057,117 @@ body {
       transform: translate(-50%, 50%) scale(1);
     }
   }
+}
+
+/* ========================================
+   L-CAM 에러 화면
+   ======================================== */
+.lcam-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.lcam-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.lcam-subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* L-CAM 에러 목록 */
+.lcam-error-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lcam-error-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.lcam-error-item:active {
+  background: var(--bg-hover);
+}
+
+.lcam-error-item-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--badge-info-bg);
+  border-radius: 8px;
+}
+
+.lcam-error-item-icon svg {
+  color: var(--badge-info-text);
+}
+
+.lcam-error-item-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.lcam-error-item-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-primary);
+  font-family: 'Consolas', 'Monaco', monospace;
+  margin-bottom: 4px;
+  word-break: break-all;
+}
+
+.lcam-error-item-message {
+  font-size: 14px;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lcam-error-item-arrow {
+  flex-shrink: 0;
+  color: var(--text-muted);
+}
+
+/* L-CAM 에러 상세 */
+.lcam-info-section {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.lcam-info-content {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  padding: 14px;
+  background: var(--bg-tertiary);
+  border-radius: var(--border-radius-sm);
+  border-left: 3px solid var(--color-primary);
+}
+
+/* 검색 결과 없음 (L-CAM) */
+.lcam-no-results {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-muted);
+  font-size: 15px;
 }

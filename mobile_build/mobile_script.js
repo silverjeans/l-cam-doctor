@@ -8,7 +8,10 @@
 // ========================================
 const state = {
   errors: [],
+  lcamErrors: [],
   currentError: null,
+  currentLcamError: null,
+  currentTab: 'main-view',
   isLoading: false
 };
 
@@ -49,7 +52,24 @@ const elements = {
   // 자료실
   docsBtn: document.getElementById('docs-btn'),
   docsDropdown: document.getElementById('docs-dropdown'),
-  docsCloseBtn: document.getElementById('docs-close-btn')
+  docsCloseBtn: document.getElementById('docs-close-btn'),
+
+  // 탭 네비게이션
+  tabLm100: document.getElementById('tab-lm100'),
+  tabLcam: document.getElementById('tab-lcam'),
+
+  // L-CAM 에러 화면
+  lcamView: document.getElementById('lcam-view'),
+  lcamDetailView: document.getElementById('lcam-detail-view'),
+  lcamSearchInput: document.getElementById('lcam-search-input'),
+  lcamClearBtn: document.getElementById('lcam-clear-btn'),
+  lcamErrorList: document.getElementById('lcam-error-list'),
+  lcamLoading: document.getElementById('lcam-loading'),
+  lcamBackBtn: document.getElementById('lcam-back-btn'),
+  lcamErrorName: document.getElementById('lcam-error-name'),
+  lcamErrorMessage: document.getElementById('lcam-error-message'),
+  lcamErrorCause: document.getElementById('lcam-error-cause'),
+  lcamErrorSolution: document.getElementById('lcam-error-solution')
 };
 
 // ========================================
@@ -75,6 +95,7 @@ async function initializeApp() {
 
   // 데이터 로드
   await loadErrorData();
+  await loadLcamErrorData();
 
   console.log('[Mobile] Initialization complete');
 }
@@ -153,6 +174,30 @@ function hideError() {
 }
 
 // ========================================
+// L-CAM 에러 데이터 로드
+// ========================================
+async function loadLcamErrorData() {
+  try {
+    const response = await fetch('lcam_errors.json');
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    state.lcamErrors = data.lcam_software_errors || [];
+
+    console.log(`[Mobile] Loaded ${state.lcamErrors.length} L-CAM error entries`);
+
+    // 초기 목록 렌더링
+    renderLcamErrorList(state.lcamErrors);
+
+  } catch (error) {
+    console.error('[Mobile] Failed to load L-CAM error data:', error);
+  }
+}
+
+// ========================================
 // 이벤트 리스너 설정
 // ========================================
 function setupEventListeners() {
@@ -175,6 +220,17 @@ function setupEventListeners() {
   // 자료실 버튼
   elements.docsBtn.addEventListener('click', openDocsDropdown);
   elements.docsCloseBtn.addEventListener('click', closeDocsDropdown);
+
+  // 탭 네비게이션
+  elements.tabLm100.addEventListener('click', () => switchTab('main-view'));
+  elements.tabLcam.addEventListener('click', () => switchTab('lcam-view'));
+
+  // L-CAM 검색
+  elements.lcamSearchInput.addEventListener('input', handleLcamSearch);
+  elements.lcamClearBtn.addEventListener('click', clearLcamSearch);
+
+  // L-CAM 뒤로가기
+  elements.lcamBackBtn.addEventListener('click', showLcamListView);
 }
 
 // ========================================
@@ -382,6 +438,8 @@ function switchToMainView() {
 function handlePopState() {
   if (elements.detailView.classList.contains('active')) {
     switchToMainView();
+  } else if (elements.lcamDetailView.classList.contains('active')) {
+    switchToLcamListView();
   }
 }
 
@@ -394,6 +452,166 @@ function openDocsDropdown() {
 
 function closeDocsDropdown() {
   elements.docsDropdown.classList.add('hidden');
+}
+
+// ========================================
+// 탭 네비게이션
+// ========================================
+function switchTab(tabId) {
+  state.currentTab = tabId;
+
+  // 모든 탭 버튼 비활성화
+  elements.tabLm100.classList.remove('active');
+  elements.tabLcam.classList.remove('active');
+
+  // 모든 뷰 숨기기
+  elements.mainView.classList.remove('active');
+  elements.lcamView.classList.remove('active');
+  elements.detailView.classList.remove('active');
+  elements.lcamDetailView.classList.remove('active');
+
+  // 선택된 탭 활성화
+  if (tabId === 'main-view') {
+    elements.tabLm100.classList.add('active');
+    elements.mainView.classList.add('active');
+  } else if (tabId === 'lcam-view') {
+    elements.tabLcam.classList.add('active');
+    elements.lcamView.classList.add('active');
+  }
+}
+
+// ========================================
+// L-CAM 에러 검색 기능
+// ========================================
+function handleLcamSearch(e) {
+  const query = e.target.value.trim();
+
+  // 지우기 버튼 표시/숨김
+  if (query.length > 0) {
+    elements.lcamClearBtn.classList.remove('hidden');
+  } else {
+    elements.lcamClearBtn.classList.add('hidden');
+    renderLcamErrorList(state.lcamErrors);
+    return;
+  }
+
+  // 검색 실행
+  const results = searchLcamErrors(query);
+  renderLcamErrorList(results);
+}
+
+function searchLcamErrors(query) {
+  if (!query || query.length === 0) return state.lcamErrors;
+
+  const lowerQuery = query.toLowerCase();
+
+  return state.lcamErrors.filter(error => {
+    // 에러명 검색
+    if (error.name && error.name.toLowerCase().includes(lowerQuery)) return true;
+
+    // 한글 메시지 검색
+    if (error.ko_message && error.ko_message.toLowerCase().includes(lowerQuery)) return true;
+
+    // 영문 메시지 검색
+    if (error.en_message && error.en_message.toLowerCase().includes(lowerQuery)) return true;
+
+    // 원인 검색
+    if (error.cause && error.cause.toLowerCase().includes(lowerQuery)) return true;
+
+    // 해결방법 검색
+    if (error.solution && error.solution.toLowerCase().includes(lowerQuery)) return true;
+
+    return false;
+  });
+}
+
+function clearLcamSearch() {
+  elements.lcamSearchInput.value = '';
+  elements.lcamClearBtn.classList.add('hidden');
+  renderLcamErrorList(state.lcamErrors);
+  elements.lcamSearchInput.focus();
+}
+
+function renderLcamErrorList(errors) {
+  if (errors.length === 0) {
+    elements.lcamErrorList.innerHTML = `
+      <div class="lcam-no-results">
+        검색 결과가 없습니다.<br>
+        다른 키워드로 검색해보세요.
+      </div>
+    `;
+    return;
+  }
+
+  elements.lcamErrorList.innerHTML = errors.map((error, index) => `
+    <div class="lcam-error-item" data-index="${index}" data-name="${error.name}">
+      <div class="lcam-error-item-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2L2 7l10 5 10-5-10-5z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="lcam-error-item-content">
+        <div class="lcam-error-item-name">${escapeHtml(error.name)}</div>
+        <div class="lcam-error-item-message">${escapeHtml(error.ko_message)}</div>
+      </div>
+      <div class="lcam-error-item-arrow">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M6 4 L10 8 L6 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+    </div>
+  `).join('');
+
+  // 클릭 이벤트 등록
+  elements.lcamErrorList.querySelectorAll('.lcam-error-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const errorName = item.dataset.name;
+      const error = state.lcamErrors.find(e => e.name === errorName);
+      if (error) {
+        showLcamDetailView(error);
+      }
+    });
+  });
+}
+
+// ========================================
+// L-CAM 에러 상세 화면
+// ========================================
+function showLcamDetailView(error) {
+  state.currentLcamError = error;
+
+  // 히스토리에 상태 추가
+  history.pushState({ view: 'lcam-detail', errorName: error.name }, '', `#lcam-${error.name}`);
+
+  // 에러 정보 렌더링
+  elements.lcamErrorName.textContent = error.name;
+  elements.lcamErrorMessage.textContent = error.ko_message;
+  elements.lcamErrorCause.textContent = error.cause || '원인 정보가 없습니다.';
+  elements.lcamErrorSolution.textContent = error.solution || '해결 방법 정보가 없습니다.';
+
+  // 화면 전환
+  elements.lcamView.classList.remove('active');
+  elements.lcamDetailView.classList.add('active');
+
+  // 스크롤 맨 위로
+  window.scrollTo(0, 0);
+}
+
+function showLcamListView() {
+  state.currentLcamError = null;
+
+  // 히스토리 뒤로
+  if (history.state && history.state.view === 'lcam-detail') {
+    history.back();
+  } else {
+    switchToLcamListView();
+  }
+}
+
+function switchToLcamListView() {
+  elements.lcamDetailView.classList.remove('active');
+  elements.lcamView.classList.add('active');
 }
 
 // ========================================
