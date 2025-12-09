@@ -343,13 +343,14 @@
     "id": 200,
     "error_code": "BLC_OC_PIN_ERR",
     "board": "DMC",
-    "severity": "CRITICAL",
-    "display_title": "BLDC 과전류 핀 에러 (BLDC OC Pin Error)",
-    "keywords": ["200", "BLDC", "과전류", "OC", "PIN"],
-    "description": "BLDC 모터 과전류 감지 핀에서 에러가 발생했습니다.",
+    "severity": "WARNING",
+    "display_title": "스핀들 과전류 (Over Current)",
+    "keywords": ["200", "과부하", "전류", "과전류", "overcurrent"],
+    "description": "스핀들에 과전류가 감지되었습니다. 장비 UI 화면에서 어떤 버(Bur)에 문제가 발생했는지 확인해주세요.",
     "steps": [
-      { "order": 1, "text": "장비 전원을 껐다가 다시 켜주세요.", "image": "assets/guide/power_reset.svg" },
-      { "order": 2, "text": "해결되지 않으면 로그를 보내주세요.", "image": "assets/guide/report_log.svg" }
+      { "order": 1, "text": "장비 UI 화면에서 어떤 툴(Bur)에 과전류가 발생했는지 확인하세요.", "image": "assets/guide/check_screen.svg" },
+      { "order": 2, "text": "해당 툴(Bur)이 마모되었거나 부러졌는지 확인하고, 콜릿에 제대로 체결되어 있는지 확인하세요.", "image": "assets/guide/check_bur_wear.svg" },
+      { "order": 3, "text": "CAM에서 타입 선택과 블록 선택이 올바른지 확인하고 데이터를 다시 전송하세요.", "image": null }
     ]
   },
   {

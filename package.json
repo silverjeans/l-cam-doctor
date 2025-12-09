@@ -13,7 +13,8 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "^28.0.0",
-    "electron-builder": "^24.9.1"
+    "electron-builder": "^24.9.1",
+    "rcedit": "^5.0.2"
   },
   "dependencies": {
     "adm-zip": "^0.5.10"
@@ -21,6 +22,7 @@
   "build": {
     "appId": "com.lcam.doctor",
     "productName": "L-CAM Doctor",
+    "afterPack": "./afterPack.js",
     "win": {
       "target": [
         "nsis"
@@ -35,7 +37,10 @@
         "ko",
         "en"
       ],
-      "language": "1042"
+      "language": "1042",
+      "installerIcon": "assets/icon.ico",
+      "uninstallerIcon": "assets/icon.ico",
+      "installerHeaderIcon": "assets/icon.ico"
     },
     "files": [
       "**/*",
