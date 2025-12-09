@@ -180,6 +180,17 @@ function searchErrors(query) {
 }
 
 function displaySearchResults(results) {
+  // 검색 결과가 없고, 숫자로 검색한 경우 Unknown Error(9999) 표시
+  if (results.length === 0) {
+    const query = elements.searchInput.value.trim();
+    const unknownError = state.errors.find(e => e.id === 9999);
+
+    if (/^\d+$/.test(query) && unknownError) {
+      // 숫자로 검색했는데 결과가 없으면 Unknown Error 표시
+      results = [unknownError];
+    }
+  }
+
   elements.resultsCount.textContent = results.length;
 
   if (results.length === 0) {
