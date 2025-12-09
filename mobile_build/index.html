@@ -7,6 +7,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#1e1e1e">
   <title>L-CAM Doctor Mobile</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -166,5 +168,13 @@
   </div>
 
   <script src="mobile_script.js"></script>
+  <script>
+    // Service Worker 등록
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js')
+        .then(reg => console.log('[PWA] Service Worker registered'))
+        .catch(err => console.log('[PWA] Service Worker registration failed:', err));
+    }
+  </script>
 </body>
 </html>

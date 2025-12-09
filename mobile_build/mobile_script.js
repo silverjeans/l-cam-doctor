@@ -342,7 +342,7 @@ function renderSteps(steps) {
         <p class="step-text">${escapeHtml(step.text)}</p>
         ${step.image ? `
           <div class="step-image">
-            <img src="assets/guide/${step.image}" alt="Step ${index + 1}"
+            <img src="${step.image}" alt="Step ${index + 1}"
                  onerror="this.parentElement.innerHTML='<div class=\\'image-placeholder\\'><svg width=\\'40\\' height=\\'40\\' viewBox=\\'0 0 40 40\\' fill=\\'none\\'><rect x=\\'4\\' y=\\'4\\' width=\\'32\\' height=\\'32\\' rx=\\'4\\' stroke=\\'#6b7280\\' stroke-width=\\'2\\'/><circle cx=\\'14\\' cy=\\'14\\' r=\\'3\\' stroke=\\'#6b7280\\' stroke-width=\\'2\\'/><path d=\\'M8 32 L16 24 L24 32\\' stroke=\\'#6b7280\\' stroke-width=\\'2\\'/><path d=\\'M20 28 L28 20 L36 28\\' stroke=\\'#6b7280\\' stroke-width=\\'2\\'/></svg><p>이미지를 불러올 수 없습니다</p></div>'">
           </div>
         ` : ''}
